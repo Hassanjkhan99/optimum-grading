@@ -1,18 +1,35 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {AuthModule} from './pages/auth/auth.module';
+import {RouterOutlet} from '@angular/router';
+import {AppRoutingModule} from './app-routing.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NgxsModule} from '@ngxs/store';
+import {AuthState} from './core/NgXs/states/auth.state';
+import {TranslateModule} from '@ngx-translate/core';
+import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
+import {UIState} from './core/NgXs/states/UI.state';
+import {ToastrModule} from 'ngx-toastr';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    NgbModule,
+    AuthModule,
+    RouterOutlet,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    NgxsModule.forRoot([AuthState, UIState]),
+    TranslateModule.forRoot(),
+    NgxsLoggerPluginModule.forRoot(),
+    ToastrModule.forRoot({positionClass: 'toast-top-right'}),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+}

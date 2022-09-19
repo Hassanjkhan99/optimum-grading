@@ -1,33 +1,32 @@
-import {Action, Selector, State, StateContext} from "@ngxs/store";
-import {Injectable} from "@angular/core";
-import {AuthActions} from "../actions/auth.actions";
-import {LoginPayload} from "../../interfaces/auth";
-import Login = AuthActions.Login;
+import {Action, Selector, State, StateContext} from '@ngxs/store';
+import {Injectable} from '@angular/core';
+import {UIActions} from '../actions/UI.actions';
+import Loading = UIActions.Loading;
 
-export class AuthStateModel{
-  user: string;
-  accessToken: string;
+export class UIStateModel {
+  isLoading: boolean;
 }
 
-@State<AuthStateModel>({
-  name:'auth',
+@State<UIStateModel>({
+  name: 'UI',
   defaults: {
-    user: '',
-    accessToken: ''
-  }
+    isLoading: false,
+  },
 })
-
 @Injectable()
-export class AuthState{
-
+export class UIState {
   @Selector()
-  static getUser(state: AuthStateModel){
-    return state.user
+  static isLoading(state: UIStateModel) {
+    return state.isLoading;
   }
 
-  @Action(AuthActions.Login)
-  login({getState, patchState}: StateContext<AuthStateModel>, {payload}: Login){
-      const state = getState();
+  @Action(UIActions.Loading)
+  setLoading(
+    {getState, patchState}: StateContext<UIStateModel>,
+    {loading}: Loading
+  ) {
+    patchState({
+      isLoading: loading,
+    });
   }
-
 }

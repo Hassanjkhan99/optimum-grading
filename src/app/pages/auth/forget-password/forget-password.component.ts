@@ -1,64 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
-import { SessionService } from '../state/session.service';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, ReactiveFormsModule} from '@angular/forms';
+import {ToastrService} from 'ngx-toastr';
+import {Store} from '@ngxs/store';
+import {AuthActions} from '../../../core/NgXs/actions/auth.actions';
+import ForgetPassWithEmail = AuthActions.ForgetPassWithEmail;
 
 @Component({
-  selector: 'kt-forget-password',
+  selector: 'optimum-grading-forget-password',
   templateUrl: './forget-password.component.html',
-  styleUrls: ['./forget-password.component.scss']
+  styleUrls: ['./forget-password.component.scss'],
+  standalone: true,
+  imports: [ReactiveFormsModule],
 })
 export class ForgetPasswordComponent implements OnInit {
+  errorMessage: string = '';
+  email: FormControl = new FormControl('');
 
-  constructor(
-    private SessionSer:SessionService,
-    private ToasterSer:ToastrService,
-    private ngxService: NgxUiLoaderService
+  constructor(private ToasterSer: ToastrService, private store: Store) {
+  }
 
-  ) { }
-  email:FormControl
   ngOnInit(): void {
-    this.email=new FormControl('')
-  }
-  errMsg:any
-  reset_pass(){
-    let obj={
-      email:this.email.value
-    }
-    // console.log("obj is",obj)
-    this.ngxService.startBackground()
-
-    this.SessionSer.reset_withemail(obj).subscribe(
-      (res)=>{
-        this.email.reset();
-        this.ngxService.stopBackground()
-
-        this.ToasterSer.success("Email Sent")
-      },(error)=>{
-        this.ngxService.stopBackground()
-        error=error.error
-        this.errMsg = error
-        // console.log("Error is",this.errMsg)
-        this.ToasterSer.error(this.errMsg)
-        // Object.keys(error).forEach(prop => {
-        //   const formControl = this.registerForm.get(prop);
-        //   if (formControl) {
-        //     // activate the error message
-        //     console.log('Register comp Error',error)
-        //     this.ToastSer.error(error[prop][0])
-        //     formControl.setErrors({
-        //       serverError: error[prop]
-        //     });
-        //   }
-    
-        // });
-        // this.registerForm.markAllAsTouched()
-        
-    
-      }
-    )
-
   }
 
+  resetPass() {
+    this.store.dispatch(new ForgetPassWithEmail(this.email.value));
+  }
 }

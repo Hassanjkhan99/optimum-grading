@@ -1,1 +1,17 @@
+// Replace above style with this css file to enable RTL styles
+@import './assets/sass/plugins.scss';
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
 /* You can add global styles to this file, and also import other style files */
+@import "./assets/sass/style.scss";
+//@import "./assets/css/style.rtl.css";
+@import "./assets/sass/style.angular.scss";
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

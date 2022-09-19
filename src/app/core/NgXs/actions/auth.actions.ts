@@ -1,6 +1,17 @@
-import {LoginPayload} from '../interfaces/auth'
+import {LoginPayload} from '../../interfaces/auth';
 
-export class Login{
-  constructor(public payload: LoginPayload) {
+export namespace AuthActions {
+  export class Login {
+    static type = '[AuthState] Login';
+
+    constructor(public loginPayload: LoginPayload) {
+    }
+  }
+
+  export class ForgetPassWithEmail {
+    static type = '[AuthState] ForgetPassWithEmail';
+
+    constructor(public email: { email: string }) {
+    }
   }
 }

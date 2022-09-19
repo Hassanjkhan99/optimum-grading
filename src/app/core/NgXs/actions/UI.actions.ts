@@ -1,12 +1,12 @@
-import {LoginPayload} from '../../interfaces/auth'
 
 
-export namespace AuthActions{
+export namespace UIActions {
 
-export class Login{
-  static type = '[AuthState] Login'
-  constructor(public payload: LoginPayload) {
+  export class Loading {
+    static type = '[UIState] Login'
+
+    constructor(public loading: boolean) {
+    }
   }
-}
 
 }
