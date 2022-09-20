@@ -19,4 +19,8 @@ export class AuthService {
   resetWithEmail(obj) {
     return this.http.post(`${main_url}/rest-auth/password/reset/`, obj);
   }
+
+  resetPassword(obj){
+    return this.http.post(`${main_url}/rest-auth/password/reset/confirm/`,obj)
+  }
 }
