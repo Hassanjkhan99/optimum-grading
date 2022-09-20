@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {TranslationService} from "./core/services/translation.service";
+import {TranslationService} from './core/services/translation.service';
 
 @Component({
   selector: 'optimum-grading-root',
@@ -13,7 +13,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.translationService.setLanguage(this.translationService.getSelectedLanguage());
+    this.translationService.setLanguage(
+      this.translationService.getSelectedLanguage()
+    );
   }
-
 }

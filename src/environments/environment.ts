@@ -7,7 +7,7 @@ export const environment = {
   // isMockEnabled: false, // You have to switch this, when your real back-end is done
   isMockEnabled: true, // You have to switch this, when your real back-end is done for local
 
-  authTokenKey: 'authce9d77b308c149d5992a80073637e4d5'
+  authTokenKey: 'authce9d77b308c149d5992a80073637e4d5',
 };
 // local
 // export const main_url = 'http://localhost:8000'
