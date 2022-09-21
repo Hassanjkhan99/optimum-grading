@@ -91,7 +91,7 @@
     <div></div>
 
     <!--begin::Link-->
-    <a class="link-primary" routerLink="/auth/forgot-password">
+    <a class="link-primary" routerLink="/forget-password">
       Forgot Password ?
     </a>
     <!--end::Link-->
@@ -101,13 +101,13 @@
   <!--begin::Action-->
   <div class="d-grid mb-10">
     <button [disabled]="loginForm.invalid" class="btn btn-primary" id="kt_sign_in_submit" type="submit">
-      <ng-container *ngIf="isLoading">
+      <ng-container *ngIf="isLoading$  | async">
         <span [style.display]="'block'" class="indicator-progress">
           Please wait...
           <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
         </span>
       </ng-container>
-      <ng-container *ngIf="(isLoading) === false">
+      <ng-container *ngIf="(isLoading$ | async) === false">
         <span class="indicator-label">Continue</span>
       </ng-container>
     </button>
@@ -116,7 +116,7 @@
   <div class="text-gray-500 text-center fw-semibold fs-6">
     Don't have an account yet?
 
-    <a class="link-primary" routerLink="/auth/registration">
+    <a class="link-primary" routerLink="/register">
       Sign up
     </a>
   </div>

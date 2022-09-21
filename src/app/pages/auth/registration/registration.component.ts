@@ -1,13 +1,29 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import {FormGroup, FormBuilder, Validators, ReactiveFormsModule} from '@angular/forms';
-import { Subscription, Observable } from 'rxjs';
-import { Router } from '@angular/router';
-import { ConfirmPasswordValidator } from './confirm-password.validator';
-import { first } from 'rxjs/operators';
-import {AuthService} from "../../../core/services/auth.service";
-import {Store} from "@ngxs/store";
-import {NgClass, NgTemplateOutlet} from "@angular/common";
+import {Component, OnInit} from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import {Observable} from 'rxjs';
+import {Router, RouterLinkWithHref} from '@angular/router';
+import {ConfirmPasswordValidator} from './confirm-password.validator';
+import {AuthService} from '../../../core/services/auth.service';
+import {Select, Store} from '@ngxs/store';
+import {
+  AsyncPipe,
+  CommonModule,
+  NgClass,
+  NgTemplateOutlet,
+} from '@angular/common';
+import {UntilDestroy} from '@ngneat/until-destroy';
+import {UIState} from '../../../core/NgXs/states/UI.state';
+import {MatDialog} from '@angular/material/dialog';
+import {TermsDialogueComponent} from './terms-dialogue/terms-dialogue.component';
+import {AuthActions} from '../../../core/NgXs/actions/auth.actions';
+import Register = AuthActions.Register;
 
+@UntilDestroy()
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -15,36 +31,33 @@ import {NgClass, NgTemplateOutlet} from "@angular/common";
   imports: [
     ReactiveFormsModule,
     NgTemplateOutlet,
-    NgClass
+    NgClass,
+    AsyncPipe,
+    CommonModule,
+    RouterLinkWithHref,
   ],
-  standalone: true
+  standalone: true,
 })
-export class RegistrationComponent implements OnInit, OnDestroy {
+export class RegistrationComponent implements OnInit {
   registrationForm: FormGroup;
   hasError: boolean;
-  isLoading$: Observable<boolean>;
 
-  // private fields
-  private unsubscribe: Subscription[] = []; // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
+  @Select(UIState.isLoading) isLoading$: Observable<boolean>;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private store: Store
+    private store: Store,
+    private matDialogue: MatDialog
   ) {
-     this.store.subscribe(next => {
+    this.store.subscribe((next) => {
       console.log(next);
-    })
+    });
     // redirect to home if already logged in
-   /* if (this.authService.currentUserValue) {
-      this.router.navigate(['/']);
-    }*/
-  }
-
-  ngOnInit(): void {
-    this.initForm();
-
+    /* if (this.authService.currentUserValue) {
+       this.router.navigate(['/']);
+     }*/
   }
 
   // convenience getter for easy access to form fields
@@ -52,10 +65,30 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     return this.registrationForm.controls;
   }
 
+  ngOnInit(): void {
+    this.initForm();
+  }
+
   initForm() {
     this.registrationForm = this.fb.group(
       {
-        fullname: [
+        first_name: [
+          '',
+          Validators.compose([
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(100),
+          ]),
+        ],
+        last_name: [
+          '',
+          Validators.compose([
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(100),
+          ]),
+        ],
+        club_name: [
           '',
           Validators.compose([
             Validators.required,
@@ -72,7 +105,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
             Validators.maxLength(320), // https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
           ]),
         ],
-        password: [
+        username: [
           '',
           Validators.compose([
             Validators.required,
@@ -80,15 +113,25 @@ export class RegistrationComponent implements OnInit, OnDestroy {
             Validators.maxLength(100),
           ]),
         ],
-        cPassword: [
+        password1: [
           '',
           Validators.compose([
             Validators.required,
-            Validators.minLength(3),
+            Validators.minLength(8),
             Validators.maxLength(100),
           ]),
         ],
+        password2: [
+          '',
+          Validators.compose([
+            Validators.required,
+            Validators.minLength(8),
+            Validators.maxLength(100),
+          ]),
+        ],
+
         agree: [false, Validators.compose([Validators.required])],
+        type: ['Head'],
       },
       {
         validator: ConfirmPasswordValidator.MatchPassword,
@@ -97,29 +140,13 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-   /* this.hasError = false;
-    const result: {
-      [key: string]: string;
-    } = {};
-    Object.keys(this.f).forEach((key) => {
-      result[key] = this.f[key].value;
-    });
-    const newUser = new UserModel();
-    newUser.setUser(result);
-    const registrationSubscr = this.authService
-      .registration(newUser)
-      .pipe(first())
-      .subscribe((user: UserModel) => {
-        if (user) {
-          this.router.navigate(['/']);
-        } else {
-          this.hasError = true;
-        }
-      });
-    this.unsubscribe.push(registrationSubscr);*/
+    this.store.dispatch(new Register(this.registrationForm.value));
   }
 
-  ngOnDestroy() {
-    this.unsubscribe.forEach((sb) => sb.unsubscribe());
+  openTerms() {
+    this.matDialogue.open(TermsDialogueComponent, {
+      width: '1000px',
+      height: '94vh',
+    });
   }
 }

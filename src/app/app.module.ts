@@ -13,6 +13,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
 import {UIState} from './core/NgXs/states/UI.state';
 import {ToastrModule} from 'ngx-toastr';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,7 +27,11 @@ import {ToastrModule} from 'ngx-toastr';
     NgxsModule.forRoot([AuthState, UIState]),
     TranslateModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
-    ToastrModule.forRoot({positionClass: 'toast-top-right'}),
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-right',
+      onActivateTick: true,
+    }),
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -11,8 +11,10 @@ import {AuthService} from '../../../core/services/auth.service';
 import {CommonModule} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
 import {UntilDestroy} from '@ngneat/until-destroy';
-import {Store} from '@ngxs/store';
+import {Select, Store} from '@ngxs/store';
 import {AuthActions} from '../../../core/NgXs/actions/auth.actions';
+import {Observable} from 'rxjs';
+import {UIState} from '../../../core/NgXs/states/UI.state';
 import Login = AuthActions.Login;
 
 @UntilDestroy()
@@ -27,16 +29,17 @@ import Login = AuthActions.Login;
     ReactiveFormsModule,
     HttpClientModule,
     RouterLinkWithHref,
+    RouterLinkWithHref,
   ],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   loginForm: FormGroup = this.fb.group({
     email: [
       '',
       Validators.compose([
         Validators.required,
         Validators.email,
-        Validators.minLength(3),
+        Validators.minLength(8),
         Validators.maxLength(50), // https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
       ]),
     ],
@@ -51,9 +54,9 @@ export class LoginComponent implements OnInit {
   });
   hasError: boolean;
   returnUrl: string;
-  isLoading: boolean;
 
-  // private fields
+  @Select(UIState.isLoading) isLoading$: Observable<boolean>;
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -64,12 +67,6 @@ export class LoginComponent implements OnInit {
     if (this.store.snapshot().auth.user) {
       this.router.navigate(['/']);
     }
-  }
-
-  ngOnInit(): void {
-    this.store.subscribe((value) => {
-      this.isLoading = value.UI.isLoading;
-    });
   }
 
   submit() {
