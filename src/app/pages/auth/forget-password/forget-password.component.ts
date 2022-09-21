@@ -7,13 +7,14 @@ import {UIState} from '../../../core/NgXs/states/UI.state';
 import {Observable} from 'rxjs';
 import {AsyncPipe, CommonModule} from '@angular/common';
 import ForgetPassWithEmail = AuthActions.ForgetPassWithEmail;
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'optimum-grading-forget-password',
   templateUrl: './forget-password.component.html',
   styleUrls: ['./forget-password.component.scss'],
   standalone: true,
-  imports: [ReactiveFormsModule, AsyncPipe, CommonModule],
+    imports: [ReactiveFormsModule, AsyncPipe, CommonModule, RouterLink],
 })
 export class ForgetPasswordComponent implements OnInit {
   errorMessage: string = '';

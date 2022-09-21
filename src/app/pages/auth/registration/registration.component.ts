@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import {Observable} from 'rxjs';
-import {Router, RouterLinkWithHref} from '@angular/router';
+import {Router, RouterLink, RouterLinkWithHref} from '@angular/router';
 import {ConfirmPasswordValidator} from './confirm-password.validator';
 import {AuthService} from '../../../core/services/auth.service';
 import {Select, Store} from '@ngxs/store';
@@ -28,14 +28,15 @@ import Register = AuthActions.Register;
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss'],
-  imports: [
-    ReactiveFormsModule,
-    NgTemplateOutlet,
-    NgClass,
-    AsyncPipe,
-    CommonModule,
-    RouterLinkWithHref,
-  ],
+    imports: [
+        ReactiveFormsModule,
+        NgTemplateOutlet,
+        NgClass,
+        AsyncPipe,
+        CommonModule,
+        RouterLinkWithHref,
+        RouterLink,
+    ],
   standalone: true,
 })
 export class RegistrationComponent implements OnInit {
