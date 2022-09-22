@@ -1,7 +1,7 @@
 import {Action, Selector, State, StateContext, Store} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 import {AuthActions} from '../actions/auth.actions';
-import {LoginResponse} from '../../interfaces/auth';
+import {LoginResponse, RegisterResponseError} from '../../interfaces/auth';
 import {User} from '../../interfaces/user';
 import {AuthService} from '../../services/auth.service';
 import {tap} from 'rxjs';
@@ -12,6 +12,7 @@ import {ToastrService} from 'ngx-toastr';
 import Login = AuthActions.Login;
 import Loading = UIActions.Loading;
 import ForgetPassWithEmail = AuthActions.ForgetPassWithEmail;
+import Register = AuthActions.Register;
 
 export class AuthStateModel {
   user: User | undefined;
@@ -88,10 +89,44 @@ export class AuthState {
         tap(
           (res) => {
             this.toasterService.success('Email Sent');
+            this.router.navigateByUrl('auth/login');
+
           },
           (error) => {
             error = error.error;
             this.toasterService.error(error);
+          }
+        )
+      )
+      .subscribe();
+  }
+
+  @Action(AuthActions.Register)
+  register(
+    {getState, patchState}: StateContext<AuthStateModel>,
+    {payload}: Register
+  ) {
+    this.store.dispatch(new Loading(true));
+    this.authService
+      .register(payload)
+      .pipe(
+        tap(
+          (res) => {
+            this.toasterService.success('Registration Successful');
+            this.toasterService.info('Please login now');
+            this.store.dispatch(new Loading(false));
+            this.router.navigateByUrl('auth/login');
+          },
+          (error) => {
+            error = error.error as RegisterResponseError;
+
+            for (const errorKey in error) {
+              const arr: string[] = error[errorKey];
+              arr.forEach((msg) => {
+                this.toasterService.error(msg);
+              });
+            }
+            this.store.dispatch(new Loading(false));
           }
         )
       )

@@ -1,4 +1,4 @@
-import {LoginPayload} from '../../interfaces/auth';
+import {LoginPayload, RegisterPayload} from '../../interfaces/auth';
 
 export namespace AuthActions {
   export class Login {
@@ -11,7 +11,14 @@ export namespace AuthActions {
   export class ForgetPassWithEmail {
     static type = '[AuthState] ForgetPassWithEmail';
 
-    constructor(public email: { email: string }) {
+    constructor(public email: string) {
+    }
+  }
+
+  export class Register {
+    static type = '[AuthState] Register';
+
+    constructor(public payload: RegisterPayload) {
     }
   }
 }

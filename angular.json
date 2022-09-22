@@ -7,7 +7,9 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+          "changeDetection": "OnPush",
+          "standalone": true
         }
       },
       "root": "",
@@ -29,7 +31,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           },
@@ -98,7 +101,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           }
