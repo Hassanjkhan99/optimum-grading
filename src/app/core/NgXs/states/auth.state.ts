@@ -89,6 +89,8 @@ export class AuthState {
         tap(
           (res) => {
             this.toasterService.success('Email Sent');
+            this.router.navigateByUrl('auth/login');
+
           },
           (error) => {
             error = error.error;
@@ -113,6 +115,7 @@ export class AuthState {
             this.toasterService.success('Registration Successful');
             this.toasterService.info('Please login now');
             this.store.dispatch(new Loading(false));
+            this.router.navigateByUrl('auth/login');
           },
           (error) => {
             error = error.error as RegisterResponseError;

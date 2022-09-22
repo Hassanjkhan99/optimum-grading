@@ -244,7 +244,7 @@
   <div class="d-grid mb-10">
     <button [disabled]="
         registrationForm.invalid || !registrationForm.controls['agree'].value
-      " class="btn btn-primary" id="kt_sign_up_submit" type="submit"   routerLink="/login"
+      " class="btn btn-primary" id="kt_sign_up_submit" type="submit"
     >
       <ng-container *ngIf="(isLoading$ | async) === false;else loading">
         <span class="indicator-label">Submit</span>
