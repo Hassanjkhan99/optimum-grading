@@ -1,0 +1,49 @@
+.info {
+  padding: 0.8rem;
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-wrap: wrap;
+    min-height: 70px;
+    h2 {
+      font-size: 2rem;
+    }
+  }
+
+  .card-btn {
+    button {
+      cursor: pointer;
+      margin: 0.5rem;
+    }
+  }
+}
+
+.search-box {
+ display: flex;
+  justify-content: center;
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+  #animated input[type=text] {
+    width: 300px;
+    box-sizing: border-box;
+    border: 1px solid #c8c8c8;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.5s ease-out;
+    transition: width 0.5s ease-out;
+  }
+
+  #animated input[type=text]:focus {
+    width: 500px;
+  }
+
+  #animated i {
+    position: relative;
+    left: 30px;
+  }
+}
+

@@ -13,6 +13,7 @@ import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
 import {UIState} from './core/NgXs/states/UI.state';
 import {ToastrModule} from 'ngx-toastr';
 import {MatDialogModule} from '@angular/material/dialog';
+import {PlayersState} from "./core/NgXs/states/player.state";
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {HeaderInterceptor} from './core/interceptors/header.interceptor';
 import {SeasonState} from './core/NgXs/states/season.state';
@@ -26,7 +27,7 @@ import {SeasonState} from './core/NgXs/states/season.state';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    NgxsModule.forRoot([AuthState, UIState, SeasonState]),
+    NgxsModule.forRoot([AuthState, UIState, SeasonState, PlayersState]),
     TranslateModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
     ToastrModule.forRoot({
