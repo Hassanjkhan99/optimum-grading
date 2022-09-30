@@ -1,25 +1,29 @@
 <!--begin::Logo image-->
 <a routerLink="/dashboard">
   <ng-container *ngIf="currentLayoutType === 'dark-sidebar'">
-    <img alt="Logo" src="./assets/media/logos/default-dark.svg" class="h-25px app-sidebar-logo-default" />
+    <img alt="Logo" class="h-65px app-sidebar-logo-default"
+         src="./assets/optimum-grading/Logos/Logo%20Left-BlueBG.png"/>
   </ng-container>
   <ng-container *ngIf="currentLayoutType !== 'dark-sidebar'">
-    <img alt="Logo" src="./assets/media/logos/default.svg" class="h-25px app-sidebar-logo-default theme-light-show" />
-    <img alt="Logo" src="./assets/media/logos/default-dark.svg"
-      class="h-25px app-sidebar-logo-default theme-dark-show" />
+    <img alt="Logo" class="h-65px app-sidebar-logo-default theme-light-show"
+         src="./assets/optimum-grading/Logos/Logo%20Left-BlueBG.png"/>
+    <img alt="Logo" class="h-65px app-sidebar-logo-default theme-dark-show"
+         src="./assets/optimum-grading/Logos/Logo%20Left-BlueBG.png"/>
   </ng-container>
 
-  <img alt="Logo" src="./assets/media/logos/default-small.svg" class="h-20px app-sidebar-logo-minimize" />
+  <img alt="Logo" class="h-50px app-sidebar-logo-minimize" src="./assets/optimum-grading/Logos/BlueBG.png"/>
 </a>
 <!--end::Logo image-->
 
 
 <ng-container *ngIf="toggleEnabled">
   <!--begin::Sidebar toggle-->
-  <div id="kt_app_sidebar_toggle"
-    class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary body-bg h-30px w-30px position-absolute top-50 start-100 translate-middle rotate"
-    [ngClass]="toggleButtonClass" data-kt-toggle="true" [attr.data-kt-toggle-state]="toggleState"
-    data-kt-toggle-target="body" [attr.data-kt-toggle-name]="toggleAttr">
+  <div [attr.data-kt-toggle-name]="toggleAttr"
+       [attr.data-kt-toggle-state]="toggleState"
+       [ngClass]="toggleButtonClass"
+       class="app-sidebar-toggle btn btn-icon ms-2 btn-shadow btn-sm btn-color-muted btn-active-color-primary body-bg h-30px w-30px position-absolute top-50 start-100 translate-middle rotate"
+       data-kt-toggle="true"
+       data-kt-toggle-target="body" id="kt_app_sidebar_toggle">
     <span [inlineSVG]="'./assets/media/icons/duotune/arrows/arr079.svg'" class="svg-icon svg-icon-2 rotate-180"></span>
   </div>
   <!--end::Sidebar toggle-->

@@ -1,7 +1,7 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { ILayout, LayoutType } from '../../core/configs/config';
-import { LayoutService } from '../../core/layout.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Subscription} from 'rxjs';
+import {ILayout} from '../../core/configs/config';
+import {LayoutService} from '../../core/layout.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,8 +9,6 @@ import { LayoutService } from '../../core/layout.service';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit, OnDestroy {
-  private unsubscribe: Subscription[] = [];
-
   // public props
   appSidebarDisplay: boolean;
   appSidebarDefaultFixedDesktop: boolean;
@@ -24,12 +22,12 @@ export class SidebarComponent implements OnInit, OnDestroy {
   appSidebarDefaultCollapseDesktopDefault: boolean;
   appSidebarDefaultCollapseMobileEnabled: boolean;
   appSidebarDefaultCollapseMobileDefault: boolean;
-
   appSidebarDefaultPushHeader: boolean;
   appSidebarDefaultPushToolbar: boolean;
   appSidebarDefaultPushFooter: boolean;
-
   appSidebarDefaultStacked: boolean;
+  // logo
+  appSidebarDefaultMinimizeDefault: boolean;
 
   // appSidebarPrimaryStickyAttributes: { [attrName: string]: string } | undefined;
 
@@ -64,13 +62,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   // appSidebarSecondaryCollapseMobileEnabled: boolean;
   // appSidebarSecondaryCollapseMobileDefault: boolean;
-
-  // logo
-  appSidebarDefaultMinimizeDefault: boolean;
   toggleButtonClass: string;
   toggleEnabled: boolean;
   toggleType: string;
   toggleState: string;
+  private unsubscribe: Subscription[] = [];
 
   constructor(private layout: LayoutService) {}
 
@@ -84,7 +80,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   updateProps(config: ILayout) {
-    this.appSidebarDisplay = this.layout.getProp('app.sidebar.display', config) as boolean;
+    this.appSidebarDisplay = this.layout.getProp(
+      'app.sidebar.display',
+      config
+    ) as boolean;
     if (!this.appSidebarDisplay) {
       return;
     }
@@ -112,7 +111,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
         config
       ) as boolean;
       if (this.appSidebarDefaultMinimizeDesktopHoverable) {
-        document.body.setAttribute('data-kt-app-sidebar-hoverable', 'true');
+        document.body.setAttribute('data-kt-app-sidebar-hoverable', 'false');
       }
     }
 

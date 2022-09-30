@@ -43,36 +43,36 @@
 // Default background states
 .menu-hover-bg {
     .menu-item {
-        @include menu-link-hover-state( 
-            var(--kt-menu-link-color-hover), 
-            var(--kt-menu-link-color-hover), 
-            var(--kt-menu-link-color-hover), 
-            var(--kt-menu-link-color-hover), 
-            var(--kt-menu-link-bg-color-hover) 
+        @include menu-link-hover-state(
+            var(--kt-menu-link-color-hover),
+            var(--kt-menu-link-color-hover),
+            var(--kt-menu-link-color-hover),
+            var(--kt-menu-link-color-hover),
+            var(--kt-menu-link-bg-color-hover)
         );
     }
 }
 
 .menu-here-bg {
     .menu-item {
-        @include menu-link-here-state( 
-            var(--kt-menu-link-color-here), 
-            var(--kt-menu-link-color-here), 
-            var(--kt-menu-link-color-here), 
-            var(--kt-menu-link-color-here), 
-            var(--kt-menu-link-bg-color-here) 
+        @include menu-link-here-state(
+            var(--kt-menu-link-color-here),
+            var(--kt-menu-link-color-here),
+            var(--kt-menu-link-color-here),
+            var(--kt-menu-link-color-here),
+            var(--kt-menu-link-bg-color-here)
         );
     }
 }
 
 .menu-root-here-bg {
     > .menu-item {
-        @include menu-link-here-state( 
-            var(--kt-menu-link-color-here), 
-            var(--kt-menu-link-color-here), 
-            var(--kt-menu-link-color-here), 
-            var(--kt-menu-link-color-here), 
-            var(--kt-menu-link-bg-color-here) 
+        @include menu-link-here-state(
+            var(--kt-menu-link-color-here),
+            var(--kt-menu-link-color-here),
+            var(--kt-menu-link-color-here),
+            var(--kt-menu-link-color-here),
+            var(--kt-menu-link-bg-color-here)
         );
     }
 }
@@ -81,12 +81,12 @@
 @include media-breakpoint-up(lg) {
     .menu-root-here-bg-desktop {
         > .menu-item {
-            @include menu-link-here-state( 
-                var(--kt-menu-link-color-here), 
-                var(--kt-menu-link-color-here), 
-                var(--kt-menu-link-color-here), 
-                var(--kt-menu-link-color-here), 
-                var(--kt-menu-link-bg-color-here) 
+            @include menu-link-here-state(
+                var(--kt-menu-link-color-here),
+                var(--kt-menu-link-color-here),
+                var(--kt-menu-link-color-here),
+                var(--kt-menu-link-color-here),
+                var(--kt-menu-link-bg-color-here)
             );
         }
     }
@@ -94,95 +94,95 @@
 
 .menu-show-bg {
     .menu-item {
-        @include menu-link-show-state( 
-            var(--kt-menu-link-color-show), 
-            var(--kt-menu-link-color-show), 
-            var(--kt-menu-link-color-show), 
-            var(--kt-menu-link-color-show), 
-            var(--kt-menu-link-bg-color-show) 
+        @include menu-link-show-state(
+            var(--kt-menu-link-color-show),
+            var(--kt-menu-link-color-show),
+            var(--kt-menu-link-color-show),
+            var(--kt-menu-link-color-show),
+            var(--kt-menu-link-bg-color-show)
         );
     }
 }
 
 .menu-active-bg {
     .menu-item {
-        @include menu-link-active-state( 
-            var(--kt-menu-link-color-active), 
-            var(--kt-menu-link-color-active), 
-            var(--kt-menu-link-color-active), 
-            var(--kt-menu-link-color-active), 
-            var(--kt-menu-link-bg-color-active) 
+        @include menu-link-active-state(
+            var(--kt-menu-link-color-active),
+            var(--kt-menu-link-color-active),
+            var(--kt-menu-link-color-active),
+            var(--kt-menu-link-color-active),
+            var(--kt-menu-link-bg-color-active)
         );
     }
 }
 
 .menu-state-bg {
     .menu-item {
-        @include menu-link-hover-state( 
-            var(--kt-menu-link-color-hover), 
-            var(--kt-menu-link-color-hover), 
-            var(--kt-menu-link-color-hover), 
-            var(--kt-menu-link-color-hover), 
-            var(--kt-menu-link-bg-color-hover) 
+        @include menu-link-hover-state(
+            var(--kt-menu-link-color-hover),
+            var(--kt-menu-link-color-hover),
+            var(--kt-menu-link-color-hover),
+            var(--kt-menu-link-color-hover),
+            var(--kt-menu-link-bg-color-hover)
         );
 
-        @include menu-link-here-state( 
-            var(--kt-menu-link-color-here), 
-            var(--kt-menu-link-color-here), 
-            var(--kt-menu-link-color-here), 
-            var(--kt-menu-link-color-here), 
-            var(--kt-menu-link-bg-color-here) 
+        @include menu-link-here-state(
+            var(--kt-menu-link-color-here),
+            var(--kt-menu-link-color-here),
+            var(--kt-menu-link-color-here),
+            var(--kt-menu-link-color-here),
+            var(--kt-menu-link-bg-color-here)
         );
 
-        @include menu-link-show-state( 
-            var(--kt-menu-link-color-show), 
-            var(--kt-menu-link-color-show), 
-            var(--kt-menu-link-color-show), 
-            var(--kt-menu-link-color-show), 
-            var(--kt-menu-link-bg-color-show) 
+        @include menu-link-show-state(
+            var(--kt-menu-link-color-show),
+            var(--kt-menu-link-color-show),
+            var(--kt-menu-link-color-show),
+            var(--kt-menu-link-color-show),
+            var(--kt-menu-link-bg-color-show)
         );
 
-        @include menu-link-active-state( 
-            var(--kt-menu-link-color-active), 
-            var(--kt-menu-link-color-active), 
-            var(--kt-menu-link-color-active), 
-            var(--kt-menu-link-color-active), 
-            var(--kt-menu-link-bg-color-active) 
+        @include menu-link-active-state(
+            var(--kt-menu-link-color-active),
+            var(--kt-menu-link-color-active),
+            var(--kt-menu-link-color-active),
+            var(--kt-menu-link-color-active),
+            var(--kt-menu-link-bg-color-active)
         );
     }
 }
 
 .menu-state-color {
     .menu-item {
-        @include menu-link-hover-state( 
-            var(--kt-menu-link-color-hover), 
-            var(--kt-menu-link-color-hover), 
-            var(--kt-menu-link-color-hover), 
-            var(--kt-menu-link-color-hover), 
+        @include menu-link-hover-state(
+            var(--kt-menu-link-color-hover),
+            var(--kt-menu-link-color-hover),
+            var(--kt-menu-link-color-hover),
+            var(--kt-menu-link-color-hover),
             null
         );
 
-        @include menu-link-here-state( 
-            var(--kt-menu-link-color-here), 
-            var(--kt-menu-link-color-here), 
-            var(--kt-menu-link-color-here), 
-            var(--kt-menu-link-color-here), 
+        @include menu-link-here-state(
+            var(--kt-menu-link-color-here),
+            var(--kt-menu-link-color-here),
+            var(--kt-menu-link-color-here),
+            var(--kt-menu-link-color-here),
             null
         );
 
-        @include menu-link-show-state( 
-            var(--kt-menu-link-color-show), 
-            var(--kt-menu-link-color-show), 
-            var(--kt-menu-link-color-show), 
-            var(--kt-menu-link-color-show), 
+        @include menu-link-show-state(
+            var(--kt-menu-link-color-show),
+            var(--kt-menu-link-color-show),
+            var(--kt-menu-link-color-show),
+            var(--kt-menu-link-color-show),
             null
         );
 
-        @include menu-link-active-state( 
-            var(--kt-menu-link-color-active), 
-            var(--kt-menu-link-color-active), 
-            var(--kt-menu-link-color-active), 
-            var(--kt-menu-link-color-active), 
+        @include menu-link-active-state(
+            var(--kt-menu-link-color-active),
+            var(--kt-menu-link-color-active),
+            var(--kt-menu-link-color-active),
+            var(--kt-menu-link-color-active),
             null
         );
     }
@@ -191,35 +191,35 @@
 // Primary background states
 .menu-hover-bg-primary {
     .menu-item {
-        @include menu-link-hover-state( 
-            var(--kt-primary-inverse), 
-            var(--kt-primary-inverse), 
-            var(--kt-primary-inverse), 
-            var(--kt-primary-inverse), 
-            var(--kt-primary) 
+        @include menu-link-hover-state(
+            var(--kt-primary-inverse),
+            var(--kt-primary-inverse),
+            var(--kt-primary-inverse),
+            var(--kt-primary-inverse),
+            var(--kt-primary)
         );
     }
 }
 
 .menu-show-bg-primary {
     .menu-item {
-        @include menu-link-show-state( 
-            var(--kt-primary-inverse), 
-            var(--kt-primary-inverse), 
-            var(--kt-primary-inverse), 
-            var(--kt-primary-inverse), 
-            var(--kt-primary) 
+        @include menu-link-show-state(
+            var(--kt-primary-inverse),
+            var(--kt-primary-inverse),
+            var(--kt-primary-inverse),
+            var(--kt-primary-inverse),
+            var(--kt-primary)
         );
     }
 }
 
 .menu-here-bg-primary {
     .menu-item {
-        @include menu-link-here-state( 
-            var(--kt-primary-inverse), 
-            var(--kt-primary-inverse), 
-            var(--kt-primary-inverse), 
-            var(--kt-primary-inverse), 
+        @include menu-link-here-state(
+            var(--kt-primary-inverse),
+            var(--kt-primary-inverse),
+            var(--kt-primary-inverse),
+            var(--kt-primary-inverse),
             var(--kt-primary)
         );
     }
@@ -227,11 +227,11 @@
 
 .menu-active-bg-primary {
     .menu-item {
-        @include menu-link-active-state( 
-            var(--kt-primary-inverse), 
-            var(--kt-primary-inverse), 
-            var(--kt-primary-inverse), 
-            var(--kt-primary-inverse), 
+        @include menu-link-active-state(
+            var(--kt-primary-inverse),
+            var(--kt-primary-inverse),
+            var(--kt-primary-inverse),
+            var(--kt-primary-inverse),
             var(--kt-primary)
         );
     }
@@ -239,44 +239,44 @@
 
 .menu-state-bg-primary {
     .menu-item {
-        @include menu-link-hover-state( 
-            var(--kt-primary-inverse), 
-            var(--kt-primary-inverse), 
-            var(--kt-primary-inverse), 
-            var(--kt-primary-inverse), 
-            var(--kt-primary) 
-        );
-
-        @include menu-link-show-state( 
-            var(--kt-primary-inverse), 
-            var(--kt-primary-inverse), 
-            var(--kt-primary-inverse), 
-            var(--kt-primary-inverse), 
-            var(--kt-primary) 
-        );
-
-        @include menu-link-here-state( 
-            var(--kt-primary-inverse), 
-            var(--kt-primary-inverse), 
-            var(--kt-primary-inverse), 
-            var(--kt-primary-inverse), 
+        @include menu-link-hover-state(
+            var(--kt-primary-inverse),
+            var(--kt-primary-inverse),
+            var(--kt-primary-inverse),
+            var(--kt-primary-inverse),
             var(--kt-primary)
         );
 
-        @include menu-link-active-state( 
-            var(--kt-primary-inverse), 
-            var(--kt-primary-inverse), 
-            var(--kt-primary-inverse), 
-            var(--kt-primary-inverse), 
+        @include menu-link-show-state(
+            var(--kt-primary-inverse),
+            var(--kt-primary-inverse),
+            var(--kt-primary-inverse),
+            var(--kt-primary-inverse),
             var(--kt-primary)
         );
 
-        @include menu-link-show-state( 
-            var(--kt-primary-inverse), 
-            var(--kt-primary-inverse), 
-            var(--kt-primary-inverse), 
-            var(--kt-primary-inverse), 
-            var(--kt-primary) 
+        @include menu-link-here-state(
+            var(--kt-primary-inverse),
+            var(--kt-primary-inverse),
+            var(--kt-primary-inverse),
+            var(--kt-primary-inverse),
+            var(--kt-primary)
+        );
+
+        @include menu-link-active-state(
+            var(--kt-primary-inverse),
+            var(--kt-primary-inverse),
+            var(--kt-primary-inverse),
+            var(--kt-primary-inverse),
+            var(--kt-primary)
+        );
+
+        @include menu-link-show-state(
+            var(--kt-primary-inverse),
+            var(--kt-primary-inverse),
+            var(--kt-primary-inverse),
+            var(--kt-primary-inverse),
+            var(--kt-primary)
         );
     }
 }

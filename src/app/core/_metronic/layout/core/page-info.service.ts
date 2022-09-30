@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
 
 export interface PageLink {
   title: string;
@@ -64,7 +64,7 @@ export class PageInfoService {
     this.setTitle(title);
   }
 
-  public calculateTitleInMenu(menuId: string): string | undefined {
+  public calculateTitleInMenu(menuId: string): string | undefined | void {
     const menu = document.getElementById(menuId);
     if (!menu) {
       return;
@@ -101,7 +101,7 @@ export class PageInfoService {
 
   public calculateBreadcrumbsInMenu(
     menuId: string
-  ): Array<PageLink> | undefined {
+  ): Array<PageLink> | null | void {
     const result: Array<PageLink> = [];
     const menu = document.getElementById(menuId);
     if (!menu) {

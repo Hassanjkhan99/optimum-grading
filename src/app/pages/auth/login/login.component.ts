@@ -1,11 +1,5 @@
 import {Component} from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators,} from '@angular/forms';
 import {Router, RouterLinkWithHref} from '@angular/router';
 import {AuthService} from '../../../core/services/auth.service';
 import {CommonModule} from '@angular/common';
@@ -64,9 +58,9 @@ export class LoginComponent {
     private store: Store
   ) {
     // redirect to home if already logged in
-    if (this.store.snapshot().auth.user) {
-      this.router.navigate(['/']);
-    }
+    // if (this.store.snapshot().auth.user) {
+    //   this.router.navigate(['/']);
+    // }
   }
 
   submit() {

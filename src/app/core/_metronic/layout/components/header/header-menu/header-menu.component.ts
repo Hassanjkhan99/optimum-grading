@@ -1,8 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { LayoutType } from '../../../core/configs/config';
-import { LayoutInitService } from '../../../core/layout-init.service';
-import { LayoutService } from '../../../core/layout.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {LayoutType} from '../../../core/configs/config';
+import {LayoutInitService} from '../../../core/layout-init.service';
+import {LayoutService} from '../../../core/layout.service';
+import {FormControl} from '@angular/forms';
+import {Select} from '@ngxs/store';
+import {SeasonState} from '../../../../../NgXs/states/season.state';
+import {Observable} from 'rxjs';
+import {Season} from '../../../../../interfaces/season.interface';
 
 @Component({
   selector: 'app-header-menu',
@@ -10,9 +15,25 @@ import { LayoutService } from '../../../core/layout.service';
   styleUrls: ['./header-menu.component.scss'],
 })
 export class HeaderMenuComponent implements OnInit {
-  constructor(private router: Router, private layout: LayoutService, private layoutInit: LayoutInitService) {}
+  type = [
+    { label: 'Offence' },
+    { label: 'Defence' },
+    { label: 'Special Teams' },
+  ];
+  teamType = new FormControl('');
 
-  ngOnInit(): void {}
+  @Select(SeasonState.seasons) seasons: Observable<Season[]>;
+
+  constructor(
+    private router: Router,
+    private layout: LayoutService,
+    private layoutInit: LayoutInitService
+  ) {}
+
+  ngOnInit(): void {
+    console.log(this.layout.getBaseLayoutTypeFromRouteOrLocalStorage());
+    // this.layoutInit.setBaseLayoutType('light-sidebar');
+  }
 
   calculateMenuItemCssClass(url: string): string {
     return checkIsActive(this.router.url, url) ? 'active' : '';
@@ -22,11 +43,13 @@ export class HeaderMenuComponent implements OnInit {
     this.layoutInit.setBaseLayoutType(layoutType);
   }
 
-  setToolbar(toolbarLayout: 'classic' | 'accounting' | 'extended' | 'reports' | 'saas') {
-    const currentConfig = {...this.layout.layoutConfigSubject.value};
+  setToolbar(
+    toolbarLayout: 'classic' | 'accounting' | 'extended' | 'reports' | 'saas'
+  ) {
+    const currentConfig = { ...this.layout.layoutConfigSubject.value };
     if (currentConfig && currentConfig.app && currentConfig.app.toolbar) {
       currentConfig.app.toolbar.layout = toolbarLayout;
-      this.layout.saveBaseConfig(currentConfig)
+      this.layout.saveBaseConfig(currentConfig);
     }
   }
 }

@@ -1,23 +1,17 @@
-import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { BehaviorSubject } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
 import * as objectPath from 'object-path';
-import {
-  LayoutType,
-  ILayout,
-  CSSClassesType,
-  HTMLAttributesType,
-} from './configs/config';
-import { DarkHeaderConfig } from './configs/dark-header.config';
-import { DarkSidebarConfig } from './configs/dark-sidebar.config';
-import { LightHeaderConfig } from './configs/light-header.config';
-import { LightSidebarConfig } from './configs/light-sidebar.config';
-import { ActivatedRoute } from '@angular/router';
+import {CSSClassesType, HTMLAttributesType, ILayout, LayoutType,} from './configs/config';
+import {DarkHeaderConfig} from './configs/dark-header.config';
+import {DarkSidebarConfig} from './configs/dark-sidebar.config';
+import {LightHeaderConfig} from './configs/light-header.config';
+import {LightSidebarConfig} from './configs/light-sidebar.config';
+import {ActivatedRoute} from '@angular/router';
 
-const LAYOUT_CONFIG_LOCAL_STORAGE_KEY = `${environment.appVersion}-layoutConfig`;
-const BASE_LAYOUT_TYPE_LOCAL_STORAGE_KEY = `${environment.appVersion}-baseLayoutType`;
-const defaultBaseLayoutType: LayoutType = 'dark-sidebar';
-const defaultLayoutConfig: ILayout = DarkSidebarConfig;
+const LAYOUT_CONFIG_LOCAL_STORAGE_KEY = `1.0-layoutConfig`;
+const BASE_LAYOUT_TYPE_LOCAL_STORAGE_KEY = `1.0-baseLayoutType`;
+const defaultBaseLayoutType: LayoutType = 'light-sidebar';
+const defaultLayoutConfig: ILayout = LightSidebarConfig;
 
 export function getEmptyHTMLAttributes(): HTMLAttributesType {
   return {
@@ -72,7 +66,10 @@ export class LayoutService {
 
   constructor(private activatedRoute: ActivatedRoute) {}
 
-  getProp(path: string, config?: ILayout): string | boolean | undefined | Object {
+  getProp(
+    path: string,
+    config?: ILayout
+  ): string | boolean | undefined | Object {
     if (config) {
       return objectPath.get(config, path);
     }
@@ -129,8 +126,8 @@ export class LayoutService {
 
   getBaseLayoutTypeFromRouteOrLocalStorage(): LayoutType {
     const routeData = this.activatedRoute.firstChild?.snapshot?.data;
-    if (routeData && routeData.layout) {
-      return routeData.layout as LayoutType;
+    if (routeData && routeData['layout']) {
+      return routeData['layout'] as LayoutType;
     }
 
     return this.getBaseLayoutTypeFromLocalStorage();
