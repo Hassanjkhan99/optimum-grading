@@ -5,17 +5,17 @@ import {Store} from '@ngxs/store';
 import {
   LoginPayload,
   LoginResponse,
+  RefreshTokenResponse,
   RegisterPayload,
   RegisterResponse,
-} from '../interfaces/auth';
+} from '../interfaces/auth.interface';
 import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient, private store: Store) {
-  }
+  constructor(private http: HttpClient, private store: Store) {}
 
   // public methods
   login(credentials: LoginPayload): Observable<LoginResponse> {
@@ -23,7 +23,6 @@ export class AuthService {
   }
 
   resetWithEmail(obj: string) {
-    console.log(obj);
     return this.http.post(`${main_url}/rest-auth/password/reset/`, {
       email: obj,
     });
@@ -31,6 +30,10 @@ export class AuthService {
 
   resetPassword(obj) {
     return this.http.post(`${main_url}/rest-auth/password/reset/confirm/`, obj);
+  }
+
+  refreshToken(refresh): Observable<RefreshTokenResponse> {
+    return this.http.post<any>(`${main_url}/api/token/refresh/`, { refresh });
   }
 
   register(payload: RegisterPayload): Observable<RegisterResponse> {

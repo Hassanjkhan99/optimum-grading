@@ -8,6 +8,19 @@ export const environment = {
   isMockEnabled: true, // You have to switch this, when your real back-end is done for local
 
   authTokenKey: 'authce9d77b308c149d5992a80073637e4d5',
+  USERDATA_KEY: 'authf649fc9a5f55',
+  apiUrl: 'api',
+  appThemeName: 'Metronic',
+  appPurchaseUrl: 'https://1.envato.market/EA4JP',
+  appHTMLIntegration:
+    'https://preview.keenthemes.com/metronic8/demo1/documentation/base/helpers/flex-layouts.html',
+  appPreviewUrl: 'https://preview.keenthemes.com/metronic8/angular/demo1/',
+  appPreviewAngularUrl:
+    'https://preview.keenthemes.com/metronic8/angular/demo1',
+  appPreviewDocsUrl: 'https://preview.keenthemes.com/metronic8/angular/docs',
+  appPreviewChangelogUrl:
+    'https://preview.keenthemes.com/metronic8/angular/docs/changelog',
+  authBackgroundImage: '/assets/optimum-grading/auth/auth-screen__no-text.jpg',
 };
 // local
 // export const main_url = 'http://localhost:8000'

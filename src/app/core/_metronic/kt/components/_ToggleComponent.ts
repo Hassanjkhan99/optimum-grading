@@ -1,10 +1,6 @@
-import {
-  DataUtil,
-  getUniqueIdWithPrefix,
-  EventHandlerUtil,
-} from '../_utils/index';
+import {DataUtil, EventHandlerUtil, getUniqueIdWithPrefix,} from '../_utils/index';
 // Helpers
-import { CookieComponent } from './_CookieComponent';
+import {CookieComponent} from './_CookieComponent';
 
 export interface ToggleOptions {
   saveState: boolean;
@@ -52,6 +48,78 @@ class ToggleComponent {
     DataUtil.set(this.element, 'toggle', this);
   }
 
+  // Static methods
+  public static getInstance = (el: HTMLElement) => {
+    const toggleElement = DataUtil.get(el, 'toggle');
+    if (toggleElement) {
+      return toggleElement;
+    }
+
+    return null;
+  };
+
+  public static createInstances = (selector: string) => {
+    const elements = document.body.querySelectorAll<HTMLElement>(selector);
+    elements.forEach((el) => {
+      let toggle = ToggleComponent.getInstance(el);
+      if (!toggle) {
+        toggle = new ToggleComponent(el, defaultToggleOptions);
+      }
+    });
+  };
+
+  public static reinitialization = () => {
+    ToggleComponent.createInstances('[data-kt-toggle]');
+  };
+
+  public static bootstrap = () => {
+    ToggleComponent.createInstances('[data-kt-toggle]');
+  };
+
+  // Plugin API
+  public toggle = () => {
+    return this._toggle();
+  };
+
+  ///////////////////////
+  // ** Public API  ** //
+  ///////////////////////
+
+  // Plugin API
+
+  public enable = () => {
+    return this._enable();
+  };
+
+  public disable = () => {
+    return this._disable();
+  };
+
+  public isEnabled = () => {
+    return this._isEnabled();
+  };
+
+  public goElement = () => {
+    return this.element;
+  };
+
+  // Event API
+  public on = (name: string, handler: Function) => {
+    return EventHandlerUtil.on(this.element, name, handler);
+  };
+
+  public one = (name: string, handler: Function) => {
+    return EventHandlerUtil.one(this.element, name, handler);
+  };
+
+  public off = (name: string, handlerId: string) => {
+    return EventHandlerUtil.off(this.element, name, handlerId);
+  };
+
+  public trigger = (name: string, event?: Event) => {
+    return EventHandlerUtil.trigger(this.element, name, event);
+  };
+
   private _handlers = () => {
     this.element.addEventListener('click', (e: Event) => {
       e.preventDefault();
@@ -87,7 +155,7 @@ class ToggleComponent {
 
   private _enable = () => {
     if (this._isEnabled()) {
-      return;
+      return true;
     }
 
     EventHandlerUtil.trigger(this.element, 'kt.toggle.enable');
@@ -132,77 +200,6 @@ class ToggleComponent {
     return (
       String(this.target.getAttribute(this.attribute)).toLowerCase() === 'on'
     );
-  };
-
-  ///////////////////////
-  // ** Public API  ** //
-  ///////////////////////
-
-  // Plugin API
-  // Plugin API
-  public toggle = () => {
-    return this._toggle();
-  };
-
-  public enable = () => {
-    return this._enable();
-  };
-
-  public disable = () => {
-    return this._disable();
-  };
-
-  public isEnabled = () => {
-    return this._isEnabled();
-  };
-
-  public goElement = () => {
-    return this.element;
-  };
-
-  // Event API
-  public on = (name: string, handler: Function) => {
-    return EventHandlerUtil.on(this.element, name, handler);
-  };
-
-  public one = (name: string, handler: Function) => {
-    return EventHandlerUtil.one(this.element, name, handler);
-  };
-
-  public off = (name: string, handlerId: string) => {
-    return EventHandlerUtil.off(this.element, name, handlerId);
-  };
-
-  public trigger = (name: string, event?: Event) => {
-    return EventHandlerUtil.trigger(this.element, name, event);
-  };
-
-  // Static methods
-  public static getInstance = (el: HTMLElement) => {
-    const toggleElement = DataUtil.get(el, 'toggle');
-    if (toggleElement) {
-      return toggleElement;
-    }
-
-    return null;
-  };
-
-  public static createInstances = (selector: string) => {
-    const elements = document.body.querySelectorAll<HTMLElement>(selector);
-    elements.forEach((el) => {
-      let toggle = ToggleComponent.getInstance(el);
-      if (!toggle) {
-        toggle = new ToggleComponent(el, defaultToggleOptions);
-      }
-    });
-  };
-
-  public static reinitialization = () => {
-    ToggleComponent.createInstances('[data-kt-toggle]');
-  };
-
-  public static bootstrap = () => {
-    ToggleComponent.createInstances('[data-kt-toggle]');
   };
 }
 

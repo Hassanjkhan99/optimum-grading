@@ -8,7 +8,7 @@
     "strict": false,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
-    "noImplicitReturns": true,
+    "noImplicitReturns": false,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
@@ -22,7 +22,16 @@
       "es2020",
       "dom"
     ],
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "paths": {
+      "@assets/*": ["assets/*"],
+      "@core/*": ["app/core/*"],
+      "@pages/*": ["app/pages/*"],
+      "@metronic/*": ["app/core/_metronic/*"],
+      "@interfaces/*": ["app/core/interfaces/*"],
+      "@ngxs/*": ["app/core/NgXs/*"],
+      "@services/*": ["app/core/services/*"],
+    },
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

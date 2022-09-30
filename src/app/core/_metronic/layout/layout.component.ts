@@ -1,15 +1,9 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  ElementRef,
-  OnDestroy,
-} from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { LayoutService } from './core/layout.service';
-import { LayoutInitService } from './core/layout-init.service';
-import { ILayout, LayoutType } from './core/configs/config';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild,} from '@angular/core';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {Subscription} from 'rxjs';
+import {LayoutService} from './core/layout.service';
+import {LayoutInitService} from './core/layout-init.service';
+import {ILayout, LayoutType} from './core/configs/config';
 
 @Component({
   selector: 'app-layout',
@@ -17,11 +11,10 @@ import { ILayout, LayoutType } from './core/configs/config';
   styleUrls: ['./layout.component.scss'],
 })
 export class LayoutComponent implements OnInit, OnDestroy {
-  private unsubscribe: Subscription[] = [];
-
-  // Public variables
   // page
   pageContainerCSSClasses: string;
+
+  // Public variables
   // header
   appHeaderDefaultClass: string = '';
   appHeaderDisplay: boolean;
@@ -39,7 +32,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
   appToolbarStickyAttributes: { [attrName: string]: string } = {};
   appToolbarMinimizeEnabled: boolean;
   appToolbarMinimizeAttributes: { [attrName: string]: string } = {};
-
   // content
   appContentContiner?: 'fixed' | 'fluid';
   appContentContainerClass: string;
@@ -62,13 +54,12 @@ export class LayoutComponent implements OnInit, OnDestroy {
   appFooterContainerCSSClass: string = '';
   appFooterFixedDesktop: boolean;
   appFooterFixedMobile: boolean;
-
   // scrolltop
   scrolltopDisplay: boolean;
-
   @ViewChild('ktAside', { static: true }) ktAside: ElementRef;
   @ViewChild('ktHeaderMobile', { static: true }) ktHeaderMobile: ElementRef;
   @ViewChild('ktHeader', { static: true }) ktHeader: ElementRef;
+  private unsubscribe: Subscription[] = [];
 
   constructor(
     private initService: LayoutInitService,
@@ -82,7 +73,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
         const currentLayoutType = this.layout.currentLayoutTypeSubject.value;
 
         const nextLayoutType: LayoutType =
-          this.activatedRoute?.firstChild?.snapshot.data.layout ||
+          this.activatedRoute?.firstChild?.snapshot.data['layout'] ||
           this.layout.getBaseLayoutTypeFromLocalStorage();
 
         if (currentLayoutType !== nextLayoutType || !currentLayoutType) {
@@ -284,9 +275,18 @@ export class LayoutComponent implements OnInit, OnDestroy {
   }
 
   updateFooter(config: ILayout) {
-    this.appFooterCSSClass = this.layout.getProp('app.footer.class', config) as string;
-    this.appFooterContainer = this.layout.getProp('app.footer.container', config) as string;
-    this.appFooterContainerCSSClass = this.layout.getProp('app.footer.containerClass', config) as string;
+    this.appFooterCSSClass = this.layout.getProp(
+      'app.footer.class',
+      config
+    ) as string;
+    this.appFooterContainer = this.layout.getProp(
+      'app.footer.container',
+      config
+    ) as string;
+    this.appFooterContainerCSSClass = this.layout.getProp(
+      'app.footer.containerClass',
+      config
+    ) as string;
     if (this.appFooterContainer === 'fixed') {
       this.appFooterContainerCSSClass += ' container-xxl';
     } else {
@@ -295,14 +295,19 @@ export class LayoutComponent implements OnInit, OnDestroy {
       }
     }
 
-    this.appFooterFixedDesktop = this.layout.getProp('app.footer.fixed.desktop', config) as boolean;
+    this.appFooterFixedDesktop = this.layout.getProp(
+      'app.footer.fixed.desktop',
+      config
+    ) as boolean;
     if (this.appFooterFixedDesktop) {
-      document.body.classList.add('data-kt-app-footer-fixed', 'true')
+      document.body.classList.add('data-kt-app-footer-fixed', 'true');
     }
 
-    this.appFooterFixedMobile = this.layout.getProp('app.footer.fixed.mobile') as boolean;
+    this.appFooterFixedMobile = this.layout.getProp(
+      'app.footer.fixed.mobile'
+    ) as boolean;
     if (this.appFooterFixedMobile) {
-      document.body.classList.add('data-kt-app-footer-fixed-mobile', 'true')
+      document.body.classList.add('data-kt-app-footer-fixed-mobile', 'true');
     }
   }
 

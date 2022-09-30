@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
 const routes: Routes = [
   {
@@ -8,8 +8,15 @@ const routes: Routes = [
       import('./pages/auth/auth.module').then((m) => m.AuthModule),
   },
   {
+    path: '',
+    loadChildren: () =>
+      import('./core/_metronic/layout/layout.module').then(
+        (m) => m.LayoutModule
+      ),
+  },
+  {
     path: '**',
-    redirectTo: 'auth',
+    redirectTo: '',
   },
 ];
 
@@ -17,5 +24,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}
