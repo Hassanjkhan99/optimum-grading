@@ -1,7 +1,10 @@
 import {Action, Selector, State, StateContext, Store} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 import {AuthActions} from '../actions/auth.actions';
-import {LoginResponse, RegisterResponseError,} from '../../interfaces/auth.interface';
+import {
+  LoginResponse,
+  RegisterResponseError,
+} from '../../interfaces/auth.interface';
 import {User} from '../../interfaces/user.interface';
 import {AuthService} from '../../services/auth.service';
 import {tap} from 'rxjs';
@@ -14,6 +17,7 @@ import Loading = UIActions.Loading;
 import ForgetPassWithEmail = AuthActions.ForgetPassWithEmail;
 import Register = AuthActions.Register;
 import Logout = AuthActions.Logout;
+import RefreshToken = AuthActions.RefreshToken;
 
 export class AuthStateModel {
   user: User | undefined;
@@ -78,9 +82,7 @@ export class AuthState {
         tap(
           (response: LoginResponse) => {
             // login successful if there's a jwt token in the response
-            console.log({ response });
             this.setAuthState(response, patchState, getState);
-            this.router.navigateByUrl('').then(() => {});
           },
           (error) => {
             console.log(error);
@@ -99,6 +101,7 @@ export class AuthState {
 
     if (state) {
       this.setAuthState(state, patchState, getState);
+      this.store.dispatch(new RefreshToken());
     }
   }
 
@@ -170,6 +173,7 @@ export class AuthState {
       isLoggedIn: false,
     });
     this.store.dispatch(new Loading(false));
+    this.router.navigateByUrl('/auth/login');
   }
 
   @Action(AuthActions.RefreshToken)
@@ -184,8 +188,10 @@ export class AuthState {
         tap(
           (response) => {
             localStorage.removeItem('currentUser');
-            let res: LoginResponse = { user: getState().user, ...response };
+            let res: LoginResponse = {user: getState().user, ...response};
             this.setAuthState(res, patchState, getState);
+            console.log(response.access);
+            return response.access;
           },
           (err) => {
             this.toasterService.error('cannot refresh token');

@@ -1,11 +1,14 @@
 .info {
   padding: 0.8rem;
+  width: 100%;
+
   .card-header {
     display: flex;
     justify-content: space-between;
     align-items: stretch;
     flex-wrap: wrap;
     min-height: 70px;
+
     h2 {
       font-size: 2rem;
     }
@@ -20,11 +23,12 @@
 }
 
 .search-box {
- display: flex;
+  display: flex;
   justify-content: center;
   width: 50%;
   margin: 0 auto;
   text-align: center;
+
   #animated input[type=text] {
     width: 300px;
     box-sizing: border-box;

@@ -1,5 +1,11 @@
 import {Component} from '@angular/core';
-import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators,} from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import {Router, RouterLinkWithHref} from '@angular/router';
 import {AuthService} from '../../../core/services/auth.service';
 import {CommonModule} from '@angular/common';
@@ -65,6 +71,8 @@ export class LoginComponent {
 
   submit() {
     this.hasError = false;
-    this.store.dispatch(new Login(this.loginForm.value));
+    this.store.dispatch(new Login(this.loginForm.value)).subscribe(() => {
+      this.router.navigateByUrl('');
+    });
   }
 }

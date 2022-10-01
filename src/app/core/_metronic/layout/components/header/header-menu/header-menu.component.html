@@ -1,10 +1,10 @@
 <div class="menu-item me-lg-1">
   <div class="col menu-link py-3">
     <select
+      [formControl]="season"
       [value]="0"
       class="form-select form-select-lg form-select-solid"
-      formControlName="businessType"
-      name="businessType"
+      name="seasonsSelect"
     >
       <option disabled hidden selected value="0">Select your Season</option>
       <option *ngFor="let season of seasons | async" [value]="season.id">{{season.name}} | {{season.year}}</option>

@@ -1,19 +1,18 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import {AuthGuard} from './core/guards/auth.guard';
+import {RedirectGuard} from './core/guards/redirect.guard';
 
 const routes: Routes = [
   {
     path: 'auth',
+    canActivate: [RedirectGuard],
     loadChildren: () =>
       import('./pages/auth/auth.module').then((m) => m.AuthModule),
-  }, {
-    path: 'player',
-    loadChildren: () =>
-      import('./pages/player/player.module').then((m) => m.PlayerModule),
   },
-
   {
     path: '',
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./core/_metronic/layout/layout.module').then(
         (m) => m.LayoutModule
