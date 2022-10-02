@@ -22,9 +22,9 @@
     <ng-container *ngFor="let item of sidebarItems">
       <div *ngIf="!item.submenu || item.submenu.length < 1" class="menu-item">
         <a
+          [routerLinkActive]="item.page"
           [routerLink]="item.page"
           class="menu-link without-sub"
-          routerLinkActive="active"
         ><span class="menu-icon">
             <span [inlineSVG]="item.icon" class="svg-icon svg-icon-2"></span>
           </span>
@@ -33,7 +33,6 @@
       </div>
       <div
         *ngIf="item.submenu"
-        [routerLinkActive]="item.page"
         class="menu-item menu-accordion"
         data-kt-menu-trigger="click"
       >

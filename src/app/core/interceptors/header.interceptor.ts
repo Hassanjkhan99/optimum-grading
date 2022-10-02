@@ -1,6 +1,12 @@
 import {Injectable} from '@angular/core';
-import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest,} from '@angular/common/http';
-import {Observable, tap, throwError} from 'rxjs';
+import {
+  HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+} from '@angular/common/http';
+import {Observable, take, tap, throwError} from 'rxjs';
 import {Select, Store} from '@ngxs/store';
 import {AuthState} from '../NgXs/states/auth.state';
 import {AuthActions} from '../NgXs/actions/auth.actions';
@@ -8,6 +14,7 @@ import {main_url} from '../../../environments/environment';
 import {ToastrService} from 'ngx-toastr';
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 import {UIActions} from '../NgXs/actions/UI.actions';
+import {filter} from 'rxjs/operators';
 import Logout = AuthActions.Logout;
 import Loading = UIActions.Loading;
 
@@ -44,19 +51,18 @@ export class HeaderInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     this.store.dispatch(new Loading(true));
     const isApiUrl = request.url.startsWith(main_url);
-    //
-    // console.log(localStorage.getItem('currentUser'));
-    // console.log(this.isLoggedIn);
-    // console.log({ isApiUrl });
-    // console.log(request.url);
-    // console.log(this.accessToken);
+
     if (
       this.isLoggedIn &&
       isApiUrl &&
       request.url != `${main_url}/api/token/refresh/` &&
       request.url != `${main_url}/api/token/`
     ) {
-      request = this.addToken(request);
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer  ${this.accessToken}`,
+        },
+      });
     }
     return next.handle(request).pipe(
       tap(
@@ -109,19 +115,22 @@ export class HeaderInterceptor implements HttpInterceptor {
   }
 
   private handle403Error(request: HttpRequest<any>, next: HttpHandler) {
-    this.store.dispatch(new AuthActions.RefreshToken()).subscribe({
-      next: () => {
-        request = this.addToken(request);
-        return next.handle(request).subscribe();
-      },
-    });
+    this.store
+      .dispatch(new AuthActions.RefreshToken())
+      .pipe(filter(Boolean), take(1))
+      .subscribe({
+        next: (value) => {
+          request = this.addToken(request, value);
+          return next.handle(request).subscribe();
+        },
+      });
   }
 
-  private addToken(request: HttpRequest<any>) {
-    console.log(this.accessToken);
+  private addToken(request: HttpRequest<any>, token: any) {
+    console.log(token.auth.access);
     return request.clone({
       setHeaders: {
-        Authorization: `Bearer  ${this.accessToken}`,
+        Authorization: `Bearer  ${token.auth.access}`,
       },
     });
   }

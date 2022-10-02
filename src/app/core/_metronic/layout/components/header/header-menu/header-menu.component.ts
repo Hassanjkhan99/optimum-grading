@@ -4,10 +4,12 @@ import {LayoutType} from '../../../core/configs/config';
 import {LayoutInitService} from '../../../core/layout-init.service';
 import {LayoutService} from '../../../core/layout.service';
 import {FormControl} from '@angular/forms';
-import {Select} from '@ngxs/store';
+import {Select, Store} from '@ngxs/store';
 import {SeasonState} from '../../../../../NgXs/states/season.state';
 import {Observable} from 'rxjs';
 import {Season} from '../../../../../interfaces/season.interface';
+import {SeasonActions} from '../../../../../NgXs/actions/season.actions';
+import GetAllSeasons = SeasonActions.GetAllSeasons;
 
 @Component({
   selector: 'app-header-menu',
@@ -16,22 +18,25 @@ import {Season} from '../../../../../interfaces/season.interface';
 })
 export class HeaderMenuComponent implements OnInit {
   type = [
-    { label: 'Offence' },
-    { label: 'Defence' },
-    { label: 'Special Teams' },
+    {label: 'Offense'},
+    {label: 'Defence'},
+    {label: 'Special Teams'},
   ];
-  teamType = new FormControl('');
+  teamType = new FormControl('Offense');
+  season = new FormControl(0);
 
   @Select(SeasonState.seasons) seasons: Observable<Season[]>;
 
   constructor(
     private router: Router,
     private layout: LayoutService,
-    private layoutInit: LayoutInitService
-  ) {}
+    private layoutInit: LayoutInitService,
+    private store: Store
+  ) {
+  }
 
   ngOnInit(): void {
-    console.log(this.layout.getBaseLayoutTypeFromRouteOrLocalStorage());
+    this.store.dispatch(new GetAllSeasons());
     // this.layoutInit.setBaseLayoutType('light-sidebar');
   }
 
