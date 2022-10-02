@@ -18,12 +18,12 @@ import GetAllSeasons = SeasonActions.GetAllSeasons;
 })
 export class HeaderMenuComponent implements OnInit {
   type = [
-    {label: 'Offence'},
+    {label: 'Offense'},
     {label: 'Defence'},
-    { label: 'Special Teams' },
+    {label: 'Special Teams'},
   ];
-  teamType = new FormControl('');
-  season = new FormControl('');
+  teamType = new FormControl('Offense');
+  season = new FormControl(0);
 
   @Select(SeasonState.seasons) seasons: Observable<Season[]>;
 
@@ -32,7 +32,8 @@ export class HeaderMenuComponent implements OnInit {
     private layout: LayoutService,
     private layoutInit: LayoutInitService,
     private store: Store
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.store.dispatch(new GetAllSeasons());

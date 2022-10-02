@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 import {GetPlayerResponse} from '../interfaces/player.interface';
 import {main_url} from '../../../environments/environment';
 
@@ -8,7 +8,8 @@ import {main_url} from '../../../environments/environment';
   providedIn: 'root',
 })
 export class PlayerService {
-  constructor(public http: HttpClient) {}
+  constructor(public http: HttpClient) {
+  }
 
   getPlayers(): Observable<GetPlayerResponse> {
     return this.http.get<GetPlayerResponse>(

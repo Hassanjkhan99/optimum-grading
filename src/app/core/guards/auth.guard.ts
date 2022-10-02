@@ -1,8 +1,8 @@
-import {Router} from '@angular/router';
-import {Injectable} from '@angular/core';
-import {Select, Store} from '@ngxs/store';
-import {AuthState} from '../NgXs/states/auth.state';
-import {Observable} from 'rxjs';
+import { Router } from '@angular/router';
+import { Injectable } from '@angular/core';
+import { Select, Store } from '@ngxs/store';
+import { AuthState } from '../NgXs/states/auth.state';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

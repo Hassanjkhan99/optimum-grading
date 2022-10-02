@@ -2,8 +2,7 @@
   <div class="col menu-link py-3">
     <select
       [formControl]="season"
-      [value]="0"
-      class="form-select form-select-lg form-select-solid"
+      class="form-select form-select-lg form-select-solid "
       name="seasonsSelect"
     >
       <option disabled hidden selected value="0">Select your Season</option>
@@ -15,7 +14,6 @@
   <div *ngFor="let radio of type" class="ps-1">
     <input
       [formControl]="teamType"
-      [value]="radio.label"
       class="btn-check menu-link py-3"
       type="radio"
     /><label
