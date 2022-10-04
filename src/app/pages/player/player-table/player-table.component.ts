@@ -27,13 +27,3 @@ export class PlayerTableComponent implements OnInit {
     this.store.dispatch(new GetPlayers());
   }
 }
-
-interface PlayerTableRow {
-  avatar: string;
-  firstname: string;
-  lastname: string;
-  roles: string[];
-  pg_names: string[];
-  positions: string[];
-  jersey: number;
-}

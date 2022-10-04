@@ -2,7 +2,7 @@
 <div class="info">
   <div class="card-header">
     <div>
-      <h2>Player</h2>
+        <h2>Player</h2>
     </div>
     <div class="card-btn">
       <button class="btn btn-primary" type="button">Add Player</button>
@@ -47,6 +47,16 @@
 
           <td>
             <div class="d-flex align-items-center">
+
+              <div
+                class="form-check form-check-sm form-check-custom form-check-solid px-2"
+              >
+                <input
+                  class="form-check-input widget-9-check"
+                  type="checkbox"
+                  value="1"
+                />
+              </div>
               <div class="symbol symbol-45px me-5">
                 <img *ngIf="players.avatar" alt="" src="{{players.avatar}}"/>
                 <img *ngIf="!players.avatar" alt="" src="./assets/profile.png"/>
@@ -59,7 +69,7 @@
                   {{players.firstname}} {{players.lastname}}
                 </a>
                 <span class="text-muted fw-bold text-muted d-block fs-7">
-                    Jersey No: {{players.jersey}}
+                    #{{players.jersey}}
                   </span>
               </div>
             </div>
@@ -69,7 +79,7 @@
               <div class="d-flex flex-stack flex-column mb-2">
                 <ng-container *ngFor="let role of players.roles; let i = index">
                   <span
-                    [ngClass]="{'badge-light-danger':role === 'Offense','badge-light-info':role === 'Defense','badge-light-success':role === 'Special Teams' }"
+                    [ngClass]="{'badge-light-primary':role === 'Offense','badge-light-warning':role === 'Defense','badge-light-success':role === 'Special Teams' }"
                     class="badge   fw-bold m-1">{{role}}</span>
                 </ng-container>
 
@@ -80,8 +90,8 @@
             <div class="d-flex flex-column w-100 me-2 ">
               <div class="d-flex flex-stack flex-column mb-2">
                 <ng-container *ngFor="let pg_name of players.pg_names; let i = index">
-                  <span [ngClass]="{'badge-light-warning': i % 2 === 0,'badge-light-primary':i % 2 !== 0 }"
-                        class="badge  fw-bold m-1">{{pg_name}}</span>
+                  <span
+                    class="badge badge-secondary fw-bold m-1">{{pg_name}}</span>
                 </ng-container>
 
               </div>
@@ -91,31 +101,21 @@
             <div class="d-flex flex-column w-100 me-2">
               <div class="d-flex flex-column flex-stack mb-2">
                 <ng-container *ngFor="let position of players.positions; let i = index">
-                  <span class="badge badge-secondary text-muted m-1 fs-7 fw-bold">{{position}}</span>
+                  <span class="badge badge-secondary m-1 fs-7 fw-bold">{{position}}</span>
                 </ng-container>
               </div>
             </div>
           </td>
           <td>
             <div class="d-flex justify-content-end flex-shrink-0">
-              <a
-                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"
-                href="#"
-              >
-                  <span
-                    [inlineSVG]="
-                      './assets/media/icons/duotune/general/gen019.svg'
-                    "
-                    class="svg-icon svg-icon-3"
-                  ></span>
-              </a>
+
               <a
                 class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"
                 href="#"
               >
                   <span
                     [inlineSVG]="'./assets/media/icons/duotune/art/art005.svg'"
-                    class="svg-icon svg-icon-3"
+                    class="svg-icon svg-icon-3 badge badge-light-primary"
                   ></span>
               </a>
               <a
@@ -126,7 +126,7 @@
                     [inlineSVG]="
                       './assets/media/icons/duotune/general/gen027.svg'
                     "
-                    class="svg-icon svg-icon-3"
+                    class="svg-icon svg-icon-3 badge badge-light-danger"
                   ></span>
               </a>
             </div>
