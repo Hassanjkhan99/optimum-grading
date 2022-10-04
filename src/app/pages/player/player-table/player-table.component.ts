@@ -7,12 +7,13 @@ import {Observable} from 'rxjs';
 import {PlayersState} from '../../../core/NgXs/states/player.state';
 import {Player} from '../../../core/interfaces/player.interface';
 import {MatTableModule} from '@angular/material/table';
+import {RouterLink} from '@angular/router';
 import GetPlayers = PlayerActions.GetPlayers;
 
 @Component({
   selector: 'optimum-grading-player-table',
   standalone: true,
-  imports: [CommonModule, InlineSVGModule, MatTableModule],
+  imports: [CommonModule, InlineSVGModule, MatTableModule, RouterLink],
   templateUrl: './player-table.component.html',
   styleUrls: ['./player-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

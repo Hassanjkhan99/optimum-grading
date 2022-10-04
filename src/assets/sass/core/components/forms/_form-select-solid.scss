@@ -9,7 +9,7 @@
   &.form-select-solid {
     @include placeholder(var(--kt-input-solid-placeholder-color));
     background-color: var(--kt-input-solid-bg);
-    border-color: var(--kt-text-muted);
+    border-color: var(--kt-input-border-color);
     color: var(--kt-input-solid-color);
     transition: $transition-input;
 
@@ -19,7 +19,7 @@
     &:focus,
     &.focus {
       background-color: var(--kt-input-solid-bg-focus);
-      border-color: var(--kt-text-muted) !important;
+      border-color: var(--kt-input-border-color) !important;
       color: var(--kt-input-solid-color);
       transition: $transition-input;
     }

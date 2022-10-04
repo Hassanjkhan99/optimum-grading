@@ -3,7 +3,7 @@
     <h2>Player</h2>
   </div>
   <hr/>
-  <div class="card-container row">
+  <div [formGroup]=addPlayer class="card-container row">
     <div class="avatar col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 justify-content-center">
       <img alt="your avatar" src="assets/profile.png"/>
       <h6>click to select</h6>
@@ -19,8 +19,8 @@
               <input
                 autocomplete="off"
                 class="form-control bg-transparent"
-                formControlName="first_name"
-                name="first_name"
+                formControlName="firstName"
+                name="firstName"
                 placeholder="First Name"
                 type="text"
               />
@@ -32,8 +32,8 @@
               <input
                 autocomplete="off"
                 class="form-control bg-transparent"
-                formControlName="last_name"
-                name="last_name"
+                formControlName="lastName"
+                name="lastName"
                 placeholder="Last Name"
                 type="text"
               />
@@ -44,7 +44,7 @@
               >
               <input
                 class="form-control bg-transparent"
-                formcontrolname="jersey"
+                formControlName="jersey"
                 max="99"
                 min="0"
                 placeholder="Jersey #"
@@ -72,7 +72,7 @@
               <label class="required fs-6 fw-bold form-label mb-2"
               >Select Type</label
               >
-              <select class="form-select form-select-solid">
+              <select class="form-select form-select-solid" formControlName="type">
                 <option></option>
                 <option value="Primary">Primary</option>
                 <option value="Secondary">Secondary</option>
@@ -98,7 +98,7 @@
               <label class="required fs-6 fw-bold form-label mb-2"
               >Select Type</label
               >
-              <select class="form-select form-select-solid">
+              <select class="form-select form-select-solid" formControlName="types">
                 <option></option>
                 <option value="Primary">Primary</option>
                 <option value="Secondary">Secondary</option>
@@ -108,7 +108,7 @@
               <label class="required fs-6 fw-bold form-label mb-2"
               >Select Carrier</label
               >
-              <select class="form-select form-select-solid">
+              <select class="form-select form-select-solid" formControlName="carrier">
                 <option></option>
                 <option value="Primary">Primary</option>
                 <option value="Secondary">Secondary</option>
@@ -120,347 +120,102 @@
     </div>
   </div>
 </div>
-<div class="tabs-container">
-  <div class="card card-custom">
-    <!-- begin::Header -->
-    <div class="card-header card-header-stretch overflow-auto">
-      <ul
-        class="nav nav-stretch nav-line-tabs fw-bold border-transparent flex-nowrap"
-        role="tablist"
-      >
-        <li class="nav-item">
-          <a
-            (click)="setActiveTab('Sidebar')"
-            [ngClass]="{ active: activeTab === 'Sidebar' }"
-            class="nav-link cursor-pointer"
-            role="tab"
-          >
-            sidebar
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            (click)="setActiveTab('Header')"
-            [ngClass]="{ active: activeTab === 'Header' }"
-            class="nav-link cursor-pointer"
-            role="tab"
-          >
-            Header
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            (click)="setActiveTab('Toolbar')"
-            [ngClass]="{ active: activeTab === 'Toolbar' }"
-            class="nav-link cursor-pointer"
-            role="tab"
-          >
-            Toolbar
-          </a>
-        </li>
-      </ul>
-    </div>
-    <!-- end::Header -->
-    <!-- begin::Form -->
-    <form #form="ngForm" class="form" novalidate>
-      <!-- begin::Body -->
-      <div class="card-body">
-        <div class="tab-content pt-3">
-          <!-- begin::Sidebar -->
-          <div [ngClass]="{ active: activeTab === 'Sidebar' }" class="tab-pane">
-            <div class="form-group">
-              <div class="row mb-10">
-                <div class="col-md-8 fv-row">
-                  <div class="row fv-row">
-                    <div class="col-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                      <label class="required fs-6 fw-bold form-label mb-2"
-                      >Position</label
-                      >
-                      <select class="form-select form-select-solid">
-                        <option></option>
-                        <option value="Primary">Primary</option>
-                        <option value="Secondary">Secondary</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row mb-10">
-                <div class="col-md-8 fv-row">
-                  <div class="row fv-row">
-                    <div class="col-3 col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                      <label class="required fs-6 fw-bold form-label mb-2"
-                      >Select Type</label
-                      >
-                      <select class="form-select form-select-solid">
-                        <option></option>
-                        <option value="Primary">Primary</option>
-                        <option value="Secondary">Secondary</option>
-                      </select>
-                    </div>
-                    <div class="col-3 col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                      <label class="required fs-6 fw-bold form-label mb-2"
-                      >Select Type</label
-                      >
-                      <select class="form-select form-select-solid">
-                        <option></option>
-                        <option value="Primary">Primary</option>
-                        <option value="Secondary">Secondary</option>
-                      </select>
-                    </div>
-                    <div class="col-3 col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                      <label class="required fs-6 fw-bold form-label mb-2"
-                      >Select Carrier</label
-                      >
-                      <select class="form-select form-select-solid">
-                        <option></option>
-                        <option value="Primary">Primary</option>
-                        <option value="Secondary">Secondary</option>
-                      </select>
-                    </div>
-                    <div class="col-3 col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                      <label class="required fs-6 fw-bold form-label mb-2"
-                      >Select Carrier</label
-                      >
-                      <select class="form-select form-select-solid">
-                        <option></option>
-                        <option value="Primary">Primary</option>
-                        <option value="Secondary">Secondary</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row mb-10">
-                <div class="col-md-8 fv-row">
-                  <div class="row fv-row">
-                    <div class="col-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                      <label class="required fs-6 fw-bold form-label mb-2"
-                      >Select Type</label
-                      >
-                      <select class="form-select form-select-solid">
-                        <option></option>
-                        <option value="Primary">Primary</option>
-                        <option value="Secondary">Secondary</option>
-                      </select>
-                    </div>
-                    <div class="col-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                      <label class="required fs-6 fw-bold form-label mb-2"
-                      >Select Type</label
-                      >
-                      <select class="form-select form-select-solid">
-                        <option></option>
-                        <option value="Primary">Primary</option>
-                        <option value="Secondary">Secondary</option>
-                      </select>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- end::Sidebar -->
-
-          <!-- begin::Header -->
-          <div [ngClass]="{ active: activeTab === 'Header' }" class="tab-pane">
-            <div class="form-group">
-              <div class="row mb-10">
-                <div class="col-md-8 fv-row">
-                  <div class="row fv-row">
-                    <div class="col-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                      <label class="required fs-6 fw-bold form-label mb-2"
-                      >Position</label
-                      >
-                      <select class="form-select form-select-solid">
-                        <option></option>
-                        <option value="Primary">Primary</option>
-                        <option value="Secondary">Secondary</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row mb-10">
-                <div class="col-md-8 fv-row">
-                  <div class="row fv-row">
-                    <div class="col-3 col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                      <label class="required fs-6 fw-bold form-label mb-2"
-                      >Select Type</label
-                      >
-                      <select class="form-select form-select-solid">
-                        <option></option>
-                        <option value="Primary">Primary</option>
-                        <option value="Secondary">Secondary</option>
-                      </select>
-                    </div>
-                    <div class="col-3 col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                      <label class="required fs-6 fw-bold form-label mb-2"
-                      >Select Type</label
-                      >
-                      <select class="form-select form-select-solid">
-                        <option></option>
-                        <option value="Primary">Primary</option>
-                        <option value="Secondary">Secondary</option>
-                      </select>
-                    </div>
-                    <div class="col-3 col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                      <label class="required fs-6 fw-bold form-label mb-2"
-                      >Select Carrier</label
-                      >
-                      <select class="form-select form-select-solid">
-                        <option></option>
-                        <option value="Primary">Primary</option>
-                        <option value="Secondary">Secondary</option>
-                      </select>
-                    </div>
-                    <div class="col-3 col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                      <label class="required fs-6 fw-bold form-label mb-2"
-                      >Select Carrier</label
-                      >
-                      <select class="form-select form-select-solid">
-                        <option></option>
-                        <option value="Primary">Primary</option>
-                        <option value="Secondary">Secondary</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row mb-10">
-                <div class="col-md-8 fv-row">
-                  <div class="row fv-row">
-                    <div class="col-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                      <label class="required fs-6 fw-bold form-label mb-2"
-                      >Select Type</label
-                      >
-                      <select class="form-select form-select-solid">
-                        <option></option>
-                        <option value="Primary">Primary</option>
-                        <option value="Secondary">Secondary</option>
-                      </select>
-                    </div>
-                    <div class="col-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                      <label class="required fs-6 fw-bold form-label mb-2"
-                      >Select Type</label
-                      >
-                      <select class="form-select form-select-solid">
-                        <option></option>
-                        <option value="Primary">Primary</option>
-                        <option value="Secondary">Secondary</option>
-                      </select>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- end::Header -->
-
-          <!-- begin::Toolbar -->
-          <div [ngClass]="{ active: activeTab === 'Toolbar' }" class="tab-pane">
-            <div class="form-group">
-              <div class="row mb-10">
-                <div class="col-md-8 fv-row">
-                  <div class="row fv-row">
-                    <div class="col-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                      <label class="required fs-6 fw-bold form-label mb-2"
-                      >Position</label
-                      >
-                      <select class="form-select form-select-solid">
-                        <option></option>
-                        <option value="Primary">Primary</option>
-                        <option value="Secondary">Secondary</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row mb-10">
-                <div class="col-md-8 fv-row">
-                  <div class="row fv-row">
-                    <div class="col-3 col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                      <label class="required fs-6 fw-bold form-label mb-2"
-                      >Select Type</label
-                      >
-                      <select class="form-select form-select-solid">
-                        <option></option>
-                        <option value="Primary">Primary</option>
-                        <option value="Secondary">Secondary</option>
-                      </select>
-                    </div>
-                    <div class="col-3 col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                      <label class="required fs-6 fw-bold form-label mb-2"
-                      >Select Type</label
-                      >
-                      <select class="form-select form-select-solid">
-                        <option></option>
-                        <option value="Primary">Primary</option>
-                        <option value="Secondary">Secondary</option>
-                      </select>
-                    </div>
-                    <div class="col-3 col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                      <label class="required fs-6 fw-bold form-label mb-2"
-                      >Select Carrier</label
-                      >
-                      <select class="form-select form-select-solid">
-                        <option></option>
-                        <option value="Primary">Primary</option>
-                        <option value="Secondary">Secondary</option>
-                      </select>
-                    </div>
-                    <div class="col-3 col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                      <label class="required fs-6 fw-bold form-label mb-2"
-                      >Select Carrier</label
-                      >
-                      <select class="form-select form-select-solid">
-                        <option></option>
-                        <option value="Primary">Primary</option>
-                        <option value="Secondary">Secondary</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row mb-10">
-                <div class="col-md-8 fv-row">
-                  <div class="row fv-row">
-                    <div class="col-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                      <label class="required fs-6 fw-bold form-label mb-2"
-                      >Select Type</label
-                      >
-                      <select class="form-select form-select-solid">
-                        <option></option>
-                        <option value="Primary">Primary</option>
-                        <option value="Secondary">Secondary</option>
-                      </select>
-                    </div>
-                    <div class="col-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                      <label class="required fs-6 fw-bold form-label mb-2"
-                      >Select Type</label
-                      >
-                      <select class="form-select form-select-solid">
-                        <option></option>
-                        <option value="Primary">Primary</option>
-                        <option value="Secondary">Secondary</option>
-                      </select>
-                    </div>
-
-                  </div>
-                </div>
+<optimum-grading-tabs (selectedTab)="setActiveTab($event)" [tabsList]="seasons$ | async">
+  <!-- begin::Sidebar -->
+  <ng-container *ngFor="let season of seasons$ | async">
+    <div [ngClass]="{ active: activeTab === season.id }" class="tab-pane">
+      <div class="form-group">
+        <div class="row mb-10">
+          <div class="col-md-8 fv-row">
+            <div class="row fv-row">
+              <div class="col-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                <label class="required fs-6 fw-bold form-label mb-2"
+                >Position</label
+                >
+                <select class="form-select form-select-solid">
+                  <option></option>
+                  <option value="Primary">Primary</option>
+                  <option value="Secondary">Secondary</option>
+                </select>
               </div>
             </div>
           </div>
         </div>
-        <button class="btn btn-primary">Add Player</button>
-        <!-- end::Toolbar -->
-      </div>
+        <div class="row mb-10">
+          <div class="col-md-8 fv-row">
+            <div class="row fv-row">
+              <div class="col-3 col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                <label class="required fs-6 fw-bold form-label mb-2"
+                >Select Type</label
+                >
+                <select class="form-select form-select-solid">
+                  <option></option>
+                  <option value="Primary">Primary</option>
+                  <option value="Secondary">Secondary</option>
+                </select>
+              </div>
+              <div class="col-3 col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                <label class="required fs-6 fw-bold form-label mb-2"
+                >Select Type</label
+                >
+                <select class="form-select form-select-solid">
+                  <option></option>
+                  <option value="Primary">Primary</option>
+                  <option value="Secondary">Secondary</option>
+                </select>
+              </div>
+              <div class="col-3 col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                <label class="required fs-6 fw-bold form-label mb-2"
+                >Select Carrier</label
+                >
+                <select class="form-select form-select-solid">
+                  <option></option>
+                  <option value="Primary">Primary</option>
+                  <option value="Secondary">Secondary</option>
+                </select>
+              </div>
+              <div class="col-3 col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                <label class="required fs-6 fw-bold form-label mb-2"
+                >Select Carrier</label
+                >
+                <select class="form-select form-select-solid">
+                  <option></option>
+                  <option value="Primary">Primary</option>
+                  <option value="Secondary">Secondary</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-10">
+          <div class="col-md-8 fv-row">
+            <div class="row fv-row">
+              <div class="col-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                <label class="required fs-6 fw-bold form-label mb-2"
+                >Select Type</label
+                >
+                <select class="form-select form-select-solid">
+                  <option></option>
+                  <option value="Primary">Primary</option>
+                  <option value="Secondary">Secondary</option>
+                </select>
+              </div>
+              <div class="col-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                <label class="required fs-6 fw-bold form-label mb-2"
+                >Select Type</label
+                >
+                <select class="form-select form-select-solid">
+                  <option></option>
+                  <option value="Primary">Primary</option>
+                  <option value="Secondary">Secondary</option>
+                </select>
+              </div>
 
-      <!-- end::Body -->
-      <!-- end::Footer -->
-    </form>
-    <!-- end::Form -->
-  </div>
-</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <!-- end::Sidebar -->
+</optimum-grading-tabs>
