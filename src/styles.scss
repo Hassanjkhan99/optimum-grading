@@ -3,10 +3,10 @@
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
 /* You can add global styles to this file, and also import other style files */
-@import "./assets/sass/style.scss";
 //@import "./assets/css/style.rtl.css";
-@import "./assets/sass/style.angular.scss";
 @import 'ngx-toastr/toastr.css';
+@import "./assets/sass/style.scss";
+@import "./assets/sass/style.angular.scss";
 
 html, body {
   height: 100%;

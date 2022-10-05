@@ -1,21 +1,24 @@
 import {Action, Selector, State, StateContext, Store} from '@ngxs/store';
 import {Injectable} from '@angular/core';
-import {GetPositionGroup, Position, Season} from '../../interfaces/season.interface';
+import {Position, Season} from '../../interfaces/season.interface';
 import {SeasonActions} from '../actions/season.actions';
 import {SeasonService} from '../../services/season.service';
 import {tap} from 'rxjs';
-import {UIActions} from "../actions/UI.actions";
+import {UIActions} from '../actions/UI.actions';
 import Loading = UIActions.Loading;
+
 export class SeasonStateModel {
   seasons: Season[];
-  positions: GetPositionGroup[];
+  positions: { pg_name?: Position[] };
+  specialPositions: { pg_name?: Position[] };
 }
 
 @State<SeasonStateModel>({
   name: 'Season',
   defaults: {
     seasons: [],
-    positions: [],
+    positions: {pg_name: []},
+    specialPositions: {pg_name: []},
   },
 })
 @Injectable()
@@ -27,6 +30,7 @@ export class SeasonState {
   static seasons(state: SeasonStateModel) {
     return state.seasons;
   }
+
   @Selector()
   static positions(state: SeasonStateModel) {
     return state.positions;
@@ -46,7 +50,8 @@ export class SeasonState {
           },
           () => {
           },
-          () => {}
+          () => {
+          }
         )
       )
       .subscribe();
@@ -60,14 +65,30 @@ export class SeasonState {
       .pipe(
         tap(
           (response) => {
-            patchState({
-              positions: response,
+            let positions = {};
+            let specialPositions = {};
+            response.forEach((value, index, array) => {
+              if (
+                value.side_of_ball.toLowerCase() === 'o' ||
+                value.side_of_ball.toLowerCase() === 'd'
+              ) {
+                positions[value.pg_name] = value.positions;
+              } else {
+                specialPositions[value.pg_name] = value.positions;
+              }
             });
+            patchState({
+              positions: positions,
+              specialPositions: specialPositions,
+            });
+            console.log(getState());
           },
           () => {
           },
-          () => {}
+          () => {
+          }
         )
       )
       .subscribe();
-  }}
+  }
+}

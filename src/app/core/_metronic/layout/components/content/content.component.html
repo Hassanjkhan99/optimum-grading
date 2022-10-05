@@ -2,7 +2,7 @@
   <!--begin::Content container-->
   <div [ngClass]="appContentContainerClass + ' ' + contentContainerCSSClass"
        [ngClass]="{'container-xxl': appContentContiner === 'fixed', 'container-fluid': appContentContiner === 'fluid'}"
-       class="app-container d-flex align-items-stretch justify-content-between"
+       class="app-container d-flex align-items-stretch justify-content-between  card card-rounded p-5"
        id="kt_app_content_container">
     <router-outlet></router-outlet>
   </div>

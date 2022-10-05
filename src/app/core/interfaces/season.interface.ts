@@ -5,6 +5,7 @@ export interface Season {
   user_id: string;
   default_season: boolean;
 }
+
 export interface Position {
   id: number;
   sob: string;
@@ -13,6 +14,7 @@ export interface Position {
   checked: boolean;
   postion_group: number;
 }
+
 export interface GetPositionGroup {
   user_id: number;
   name: number;

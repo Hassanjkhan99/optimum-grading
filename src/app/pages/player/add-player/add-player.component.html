@@ -3,61 +3,59 @@
     <h2>Player</h2>
   </div>
   <hr/>
-  <div [formGroup]=addPlayer class="card-container row">
-    <div class="avatar col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 justify-content-center">
-      <img alt="your avatar" src="assets/profile.png"/>
+  <div [formGroup]="addPlayer" class="card-container row">
+    <div
+      class="avatar col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12 justify-content-center"
+    >
+      <img alt="your avatar" class="w-100" src="assets/profile.png"/>
       <h6>click to select</h6>
     </div>
-    <div class="form-container col-lg-8">
+    <div class="form-container col-lg-9">
       <div class="row mb-10">
-        <div class="col-md-8 fv-row">
-          <div class="row fv-row">
-            <div class="col-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12">
-              <label class="required fs-6 fw-bold form-label mb-2"
-              >First Name</label
-              >
-              <input
-                autocomplete="off"
-                class="form-control bg-transparent"
-                formControlName="firstName"
-                name="firstName"
-                placeholder="First Name"
-                type="text"
-              />
-            </div>
-            <div class="col-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12">
-              <label class="required fs-6 fw-bold form-label mb-2"
-              >Last Name</label
-              >
-              <input
-                autocomplete="off"
-                class="form-control bg-transparent"
-                formControlName="lastName"
-                name="lastName"
-                placeholder="Last Name"
-                type="text"
-              />
-            </div>
-            <div class="col-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12">
-              <label class="required fs-6 fw-bold form-label mb-2"
-              >Jersey#</label
-              >
-              <input
-                class="form-control bg-transparent"
-                formControlName="jersey"
-                max="99"
-                min="0"
-                placeholder="Jersey #"
-                type="number"
-              />
-            </div>
-          </div>
+        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12">
+          <label class="required fs-6 fw-bold form-label mb-2"
+          >First Name</label
+          >
+          <input
+            autocomplete="off"
+            class="form-control bg-transparent"
+            formControlName="firstName"
+            name="firstName"
+            placeholder="First Name"
+            type="text"
+          />
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12">
+          <label class="required fs-6 fw-bold form-label mb-2"
+          >Last Name</label
+          >
+          <input
+            autocomplete="off"
+            class="form-control bg-transparent"
+            formControlName="lastName"
+            name="lastName"
+            placeholder="Last Name"
+            type="text"
+          />
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12">
+          <label class="required fs-6 fw-bold form-label mb-2"
+          >Jersey#</label
+          >
+          <input
+            class="form-control bg-transparent"
+            formControlName="jersey"
+            max="99"
+            min="0"
+            placeholder="Jersey #"
+            type="number"
+          />
         </div>
       </div>
       <div class="row mb-10">
-        <div class="col-md-8 fv-row">
-          <div class="row fv-row">
-            <div class="col-5 col-xl-5 col-lg-5 col-md-12 col-sm-12 col-xs-12">
+        <ng-container formArrayName="emails">
+          <ng-container *ngFor="let emailForm of emailsFormArray.controls; let i = index ">
+            <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-xs-12">
               <label class="required fs-6 fw-bold form-label mb-2">Email</label>
               <input
                 autocomplete="off"
@@ -68,30 +66,37 @@
                 type="email"
               />
             </div>
-            <div class="col-5 col-xl-5 col-lg-5 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-xs-12">
               <label class="required fs-6 fw-bold form-label mb-2"
               >Select Type</label
               >
-              <select class="form-select form-select-solid" formControlName="type">
+              <select
+                class="form-select form-select-solid"
+                formControlName="type"
+              >
                 <option></option>
                 <option value="Primary">Primary</option>
                 <option value="Secondary">Secondary</option>
               </select>
             </div>
-            <div class="col-2 col-xl-2 col-lg-2 col-md-12 col-sm-12 col-xs-12">
-              <label class="required fs-6 fw-bold form-label mb-2"
-              >Add</label
-              >
-              <button class="btn btn-light btn-sm">+</button>
+            <div *ngIf="emailsFormArray.controls.length > 1"
+                 class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-xs-12 button-center">
+              <button (click)="removeEmail(i)" class="btn btn-light btn-sm">-</button>
             </div>
-          </div>
+          </ng-container>
+        </ng-container>
 
+
+        <div *ngIf="emailsFormArray.controls.length <= 1"
+             class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-xs-12 button-center">
+          <button (click)="addEmail()" class="btn btn-light btn-sm">+</button>
         </div>
+
       </div>
-      <div class="row mb-10">
-        <div class="col-md-8 fv-row">
-          <div class="row fv-row">
-            <div class="col-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12">
+      <div class="row fv-row mb-10">
+        <ng-container formArrayName="phones">
+          <ng-container *ngFor="let emailForm of phonesFormArray.controls; let i = index ">
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12">
               <label class="required fs-6 fw-bold form-label mb-2">Phone</label>
               <input
                 class="form-control bg-transparent"
@@ -101,33 +106,54 @@
                 type="number"
               />
             </div>
-            <div class="col-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12">
               <label class="required fs-6 fw-bold form-label mb-2"
               >Select Type</label
               >
-              <select class="form-select form-select-solid" formControlName="types">
+              <select
+                class="form-select form-select-solid"
+                formControlName="type"
+              >
                 <option></option>
                 <option value="Primary">Primary</option>
                 <option value="Secondary">Secondary</option>
               </select>
             </div>
-            <div class="col-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12">
               <label class="required fs-6 fw-bold form-label mb-2"
               >Select Carrier</label
               >
-              <select class="form-select form-select-solid" formControlName="carrier">
+              <select
+                class="form-select form-select-solid"
+                formControlName="carrier"
+              >
                 <option></option>
                 <option value="Primary">Primary</option>
                 <option value="Secondary">Secondary</option>
               </select>
             </div>
-          </div>
+
+            <div *ngIf="phonesFormArray.controls.length > 1"
+                 class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12 button-center">
+              <button (click)="removePhone(i)" class="btn btn-light btn-sm">-</button>
+            </div>
+          </ng-container>
+        </ng-container>
+
+
+        <div *ngIf="phonesFormArray.controls.length <= 1"
+             class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-xs-12 button-center">
+          <button (click)="addPhone()" class="btn btn-light btn-sm">+</button>
         </div>
       </div>
     </div>
   </div>
 </div>
-<optimum-grading-tabs (selectedTab)="setActiveTab($event)" [tabsList]="seasons$ | async">
+
+<optimum-grading-tabs
+  (selectedTab)="setActiveTab($event)"
+  [tabsList]="seasons$ | async"
+>
   <!-- begin::Sidebar -->
   <ng-container *ngFor="let season of seasons$ | async">
     <div [ngClass]="{ active: activeTab === season.id }" class="tab-pane">
@@ -135,17 +161,20 @@
         <div class="row mb-10">
           <div class="col-md-8 fv-row">
             <div class="row fv-row">
-              <div class="col-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12">
+              <div
+                class="col-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12"
+              >
                 <label class="required fs-6 fw-bold form-label mb-2"
                 >Position</label
                 >
-                <select class="form-select form-select-solid" >
-                  <option *ngFor="let position of positions$ | async">
-                    {{position.pg_name}}
-                  </option>
-<!--                  <option *ngFor="let positionType of positions$ |async">{{positionType.name}}</option>-->
 
-                </select>
+                <mat-select class="form-select" multiple>
+                  <ng-container *ngFor="let position of positions$ | async | keyvalue">
+                    <mat-option disabled>{{position.key}}</mat-option>
+                    <mat-option *ngFor="let eachpg of position.value" [value]="eachpg">{{eachpg.name}}</mat-option>
+                  </ng-container>
+                </mat-select>
+
               </div>
             </div>
           </div>
@@ -153,7 +182,9 @@
         <div class="row mb-10">
           <div class="col-md-8 fv-row">
             <div class="row fv-row">
-              <div class="col-3 col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12">
+              <div
+                class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12"
+              >
                 <label class="required fs-6 fw-bold form-label mb-2"
                 >Select Type</label
                 >
@@ -163,7 +194,9 @@
                   <option value="Secondary">Secondary</option>
                 </select>
               </div>
-              <div class="col-3 col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12">
+              <div
+                class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12"
+              >
                 <label class="required fs-6 fw-bold form-label mb-2"
                 >Select Type</label
                 >
@@ -173,7 +206,9 @@
                   <option value="Secondary">Secondary</option>
                 </select>
               </div>
-              <div class="col-3 col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12">
+              <div
+                class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12"
+              >
                 <label class="required fs-6 fw-bold form-label mb-2"
                 >Select Carrier</label
                 >
@@ -183,7 +218,9 @@
                   <option value="Secondary">Secondary</option>
                 </select>
               </div>
-              <div class="col-3 col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12">
+              <div
+                class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12"
+              >
                 <label class="required fs-6 fw-bold form-label mb-2"
                 >Select Carrier</label
                 >
@@ -199,7 +236,9 @@
         <div class="row mb-10">
           <div class="col-md-8 fv-row">
             <div class="row fv-row">
-              <div class="col-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12">
+              <div
+                class="col-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12"
+              >
                 <label class="required fs-6 fw-bold form-label mb-2"
                 >Select Type</label
                 >
@@ -209,7 +248,9 @@
                   <option value="Secondary">Secondary</option>
                 </select>
               </div>
-              <div class="col-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12">
+              <div
+                class="col-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12"
+              >
                 <label class="required fs-6 fw-bold form-label mb-2"
                 >Select Type</label
                 >
@@ -219,7 +260,6 @@
                   <option value="Secondary">Secondary</option>
                 </select>
               </div>
-
             </div>
           </div>
         </div>
