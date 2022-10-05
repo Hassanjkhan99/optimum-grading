@@ -57,7 +57,7 @@
       <div class="row mb-10">
         <div class="col-md-8 fv-row">
           <div class="row fv-row">
-            <div class="col-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-5 col-xl-5 col-lg-5 col-md-12 col-sm-12 col-xs-12">
               <label class="required fs-6 fw-bold form-label mb-2">Email</label>
               <input
                 autocomplete="off"
@@ -68,7 +68,7 @@
                 type="email"
               />
             </div>
-            <div class="col-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-5 col-xl-5 col-lg-5 col-md-12 col-sm-12 col-xs-12">
               <label class="required fs-6 fw-bold form-label mb-2"
               >Select Type</label
               >
@@ -78,7 +78,14 @@
                 <option value="Secondary">Secondary</option>
               </select>
             </div>
+            <div class="col-2 col-xl-2 col-lg-2 col-md-12 col-sm-12 col-xs-12">
+              <label class="required fs-6 fw-bold form-label mb-2"
+              >Add</label
+              >
+              <button class="btn btn-light btn-sm">+</button>
+            </div>
           </div>
+
         </div>
       </div>
       <div class="row mb-10">
@@ -132,10 +139,12 @@
                 <label class="required fs-6 fw-bold form-label mb-2"
                 >Position</label
                 >
-                <select class="form-select form-select-solid">
-                  <option></option>
-                  <option value="Primary">Primary</option>
-                  <option value="Secondary">Secondary</option>
+                <select class="form-select form-select-solid" >
+                  <option *ngFor="let position of positions$ | async">
+                    {{position.pg_name}}
+                  </option>
+<!--                  <option *ngFor="let positionType of positions$ |async">{{positionType.name}}</option>-->
+
                 </select>
               </div>
             </div>
