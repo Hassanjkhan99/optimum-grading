@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {PlayerComponent} from "./player.component";
 import {PlayerTableComponent} from "./player-table/player-table.component";
 import {AddPlayerComponent} from "./add-player/add-player.component";
+import {PlayerSubstitutionComponent} from "./player-substitution/player-substitution.component";
 
 
 const routes: Routes = [
@@ -17,6 +18,10 @@ const routes: Routes = [
       {
         path: 'add-player',
         component: AddPlayerComponent,
+      },
+      {
+        path: 'player-subs',
+        component: PlayerSubstitutionComponent,
       },
 
       {path: '', redirectTo: 'player-info', pathMatch: 'full'},

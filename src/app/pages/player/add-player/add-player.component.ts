@@ -18,6 +18,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import GetAllSeasons = SeasonActions.GetAllSeasons;
 import GetPositions = SeasonActions.GetPositions;
+import GetMobileCarriers = SeasonActions.GetMobileCarriers;
 
 @Component({
   selector: 'optimum-grading-add-player',
@@ -40,7 +41,11 @@ export class AddPlayerComponent implements OnInit {
   activeTab: number = 0;
   @ViewChild('multiSelect') select: ElementRef<HTMLElement>;
   @Select(SeasonState.seasons) seasons$: Observable<Season[]>;
+  @Select(SeasonState.mobileCarriers) carriers$: Observable<string[]>;
   @Select(SeasonState.positions) positions$: Observable<{
+    pg_name: Position[];
+  }>;
+  @Select(SeasonState.specialPositions) specialPositions$: Observable<{
     pg_name: Position[];
   }>;
   itemEmail!: FormArray;
@@ -53,9 +58,7 @@ export class AddPlayerComponent implements OnInit {
   });
 
   constructor(private store: Store, private fb: FormBuilder) {
-    this.positions$.subscribe((value) => {
-      console.log(value);
-    });
+
   }
 
   get emailsFormArray(): FormArray {
@@ -77,8 +80,10 @@ export class AddPlayerComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(new GetAllSeasons());
     this.store.dispatch(new GetPositions());
+    this.store.dispatch(new GetMobileCarriers());
     this.addEmail();
     this.addPhone();
+
   }
 
   setActiveTab(tabId: number) {

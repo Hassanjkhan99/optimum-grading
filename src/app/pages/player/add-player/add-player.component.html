@@ -13,7 +13,7 @@
     <div class="form-container col-lg-9">
       <div class="row mb-10">
         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12">
-          <label class="required fs-6 fw-bold form-label mb-2"
+          <label class="fs-6 fw-bold form-label mb-2"
           >First Name</label
           >
           <input
@@ -26,7 +26,7 @@
           />
         </div>
         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12">
-          <label class="required fs-6 fw-bold form-label mb-2"
+          <label class="fs-6 fw-bold form-label mb-2"
           >Last Name</label
           >
           <input
@@ -39,7 +39,7 @@
           />
         </div>
         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12">
-          <label class="required fs-6 fw-bold form-label mb-2"
+          <label class="fs-6 fw-bold form-label mb-2"
           >Jersey#</label
           >
           <input
@@ -56,7 +56,7 @@
         <ng-container formArrayName="emails">
           <ng-container *ngFor="let emailForm of emailsFormArray.controls; let i = index ">
             <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-xs-12">
-              <label class="required fs-6 fw-bold form-label mb-2">Email</label>
+              <label class="fs-6 fw-bold form-label mb-2">Email</label>
               <input
                 autocomplete="off"
                 class="form-control bg-transparent"
@@ -67,14 +67,13 @@
               />
             </div>
             <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-xs-12">
-              <label class="required fs-6 fw-bold form-label mb-2"
+              <label class="fs-6 fw-bold form-label mb-2"
               >Select Type</label
               >
               <select
                 class="form-select form-select-solid"
                 formControlName="type"
               >
-                <option></option>
                 <option value="Primary">Primary</option>
                 <option value="Secondary">Secondary</option>
               </select>
@@ -97,7 +96,7 @@
         <ng-container formArrayName="phones">
           <ng-container *ngFor="let emailForm of phonesFormArray.controls; let i = index ">
             <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12">
-              <label class="required fs-6 fw-bold form-label mb-2">Phone</label>
+              <label class="fs-6 fw-bold form-label mb-2">Phone</label>
               <input
                 class="form-control bg-transparent"
                 formControlName="phone"
@@ -107,29 +106,27 @@
               />
             </div>
             <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12">
-              <label class="required fs-6 fw-bold form-label mb-2"
+              <label class="fs-6 fw-bold form-label mb-2"
               >Select Type</label
               >
               <select
                 class="form-select form-select-solid"
                 formControlName="type"
               >
-                <option></option>
                 <option value="Primary">Primary</option>
                 <option value="Secondary">Secondary</option>
               </select>
             </div>
             <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12">
-              <label class="required fs-6 fw-bold form-label mb-2"
+              <label class="fs-6 fw-bold form-label mb-2"
               >Select Carrier</label
               >
               <select
                 class="form-select form-select-solid"
                 formControlName="carrier"
               >
-                <option></option>
-                <option value="Primary">Primary</option>
-                <option value="Secondary">Secondary</option>
+                <option *ngFor="let carriers of carriers$ | async">{{carriers}}</option>
+
               </select>
             </div>
 
@@ -164,7 +161,7 @@
               <div
                 class="col-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12"
               >
-                <label class="required fs-6 fw-bold form-label mb-2"
+                <label class="fs-6 fw-bold form-label mb-2"
                 >Position</label
                 >
 
@@ -183,86 +180,23 @@
           <div class="col-md-8 fv-row">
             <div class="row fv-row">
               <div
-                class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12"
+                *ngFor="let specialPositions of specialPositions$ | async | keyvalue"
+                class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12 p-3"
               >
-                <label class="required fs-6 fw-bold form-label mb-2"
-                >Select Type</label
-                >
-                <select class="form-select form-select-solid">
-                  <option></option>
-                  <option value="Primary">Primary</option>
-                  <option value="Secondary">Secondary</option>
-                </select>
-              </div>
-              <div
-                class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12"
-              >
-                <label class="required fs-6 fw-bold form-label mb-2"
-                >Select Type</label
-                >
-                <select class="form-select form-select-solid">
-                  <option></option>
-                  <option value="Primary">Primary</option>
-                  <option value="Secondary">Secondary</option>
-                </select>
-              </div>
-              <div
-                class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12"
-              >
-                <label class="required fs-6 fw-bold form-label mb-2"
-                >Select Carrier</label
-                >
-                <select class="form-select form-select-solid">
-                  <option></option>
-                  <option value="Primary">Primary</option>
-                  <option value="Secondary">Secondary</option>
-                </select>
-              </div>
-              <div
-                class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12"
-              >
-                <label class="required fs-6 fw-bold form-label mb-2"
-                >Select Carrier</label
-                >
-                <select class="form-select form-select-solid">
-                  <option></option>
-                  <option value="Primary">Primary</option>
-                  <option value="Secondary">Secondary</option>
-                </select>
+                <label class="fs-6 fw-bold form-label mb-2"
+                >{{specialPositions.key}}</label>
+                <mat-select class="form-select" multiple>
+                  <ng-container>
+                    <mat-option disabled>{{specialPositions.key}}</mat-option>
+                    <mat-option *ngFor="let  eachpg of specialPositions.value"
+                                [value]="eachpg">{{eachpg.name}}</mat-option>
+                  </ng-container>
+                </mat-select>
               </div>
             </div>
           </div>
         </div>
-        <div class="row mb-10">
-          <div class="col-md-8 fv-row">
-            <div class="row fv-row">
-              <div
-                class="col-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12"
-              >
-                <label class="required fs-6 fw-bold form-label mb-2"
-                >Select Type</label
-                >
-                <select class="form-select form-select-solid">
-                  <option></option>
-                  <option value="Primary">Primary</option>
-                  <option value="Secondary">Secondary</option>
-                </select>
-              </div>
-              <div
-                class="col-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12"
-              >
-                <label class="required fs-6 fw-bold form-label mb-2"
-                >Select Type</label
-                >
-                <select class="form-select form-select-solid">
-                  <option></option>
-                  <option value="Primary">Primary</option>
-                  <option value="Secondary">Secondary</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
+
       </div>
     </div>
   </ng-container>

@@ -19,4 +19,10 @@ export class SeasonService {
       `${main_url}/PositionGroup/?side_of_ball__in=O,D,ST`
     );
   }
+
+  getMobileCarriers(): Observable<string[]> {
+    return this.http.get<string[]>(
+      `${main_url}/Player/mobile-carriers/`
+    );
+  }
 }

@@ -11,6 +11,7 @@ export class SeasonStateModel {
   seasons: Season[];
   positions: { pg_name?: Position[] };
   specialPositions: { pg_name?: Position[] };
+  mobileCarriers: string[];
 }
 
 @State<SeasonStateModel>({
@@ -19,6 +20,7 @@ export class SeasonStateModel {
     seasons: [],
     positions: {pg_name: []},
     specialPositions: {pg_name: []},
+    mobileCarriers: []
   },
 })
 @Injectable()
@@ -36,8 +38,18 @@ export class SeasonState {
     return state.positions;
   }
 
+  @Selector()
+  static specialPositions(state: SeasonStateModel) {
+    return state.specialPositions;
+  }
+
+  @Selector()
+  static mobileCarriers(state: SeasonStateModel) {
+    return state.mobileCarriers;
+  }
+
   @Action(SeasonActions.GetAllSeasons)
-  setLoading({ getState, patchState }: StateContext<SeasonStateModel>) {
+  setLoading({getState, patchState}: StateContext<SeasonStateModel>) {
     this.store.dispatch(new Loading(true));
     this.seasonService
       .getAllSeasons()
@@ -91,4 +103,27 @@ export class SeasonState {
       )
       .subscribe();
   }
+
+  @Action(SeasonActions.GetMobileCarriers)
+  mobileCarriers({getState, patchState}: StateContext<SeasonStateModel>) {
+    this.store.dispatch(new Loading(true));
+    this.seasonService
+      .getMobileCarriers()
+      .pipe(
+        tap(
+          (response) => {
+            patchState({
+              mobileCarriers: response,
+            });
+          },
+          () => {
+          },
+          () => {
+          }
+        )
+      )
+      .subscribe();
+  }
+
 }
+
